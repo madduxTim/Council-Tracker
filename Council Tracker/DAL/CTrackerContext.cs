@@ -1,0 +1,14 @@
+﻿using Council_Tracker.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+
+namespace Council_Tracker.DAL
+{
+    public class CTrackerContext : ApplicationDbContext
+    {
+        public virtual DbSet<CouncilMember> Council_Members { get; set; }
+    }
+}
