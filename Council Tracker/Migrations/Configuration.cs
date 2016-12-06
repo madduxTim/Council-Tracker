@@ -4,6 +4,8 @@ namespace Council_Tracker.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Council_Tracker.DAL;
+    using Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Council_Tracker.DAL.CTrackerContext>
     {
@@ -14,6 +16,16 @@ namespace Council_Tracker.Migrations
 
         protected override void Seed(Council_Tracker.DAL.CTrackerContext context)
         {
+            CouncilMemberData data = new CouncilMemberData();
+            context.Council_Members.AddOrUpdate(              
+                    cm => new { cm.Name, cm.Office }, new CouncilMember { Name="Billy", Office="Dog Catcher" },
+                    data.seedViceMayor()
+
+
+                //at-large CMs
+                //district CMS
+                );
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

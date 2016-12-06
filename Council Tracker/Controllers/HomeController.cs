@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Council_Tracker.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,8 @@ namespace Council_Tracker.Controllers
     {
         public ActionResult Index()
         {
+            CouncilMemberData data = new CouncilMemberData();
+            var ViceMayor = data.seedViceMayor();
             return View();
         }
 

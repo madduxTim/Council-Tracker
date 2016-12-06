@@ -14,11 +14,10 @@ namespace Council_Tracker.Tests.DAL
         [TestMethod]
         public void CanSeedViceMayorData()
         {
-            WebClient client = new WebClient();
+            //WebClient client = new WebClient();
             //CouncilMember vicemayor = new CouncilMember();
-
-            string vicemayor = data.seedViceMayor();
-            Assert.IsNotNull(vicemayor);
+            //CouncilMember vicemayor = data.seedViceMayor();
+            //Assert.IsNotNull(vicemayor);
         }
     }
 }
