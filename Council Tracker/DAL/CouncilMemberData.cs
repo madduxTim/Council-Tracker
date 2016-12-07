@@ -16,64 +16,150 @@ namespace Council_Tracker.DAL
         {
             WebClient client = new WebClient();
             CouncilMember viceMayor = new CouncilMember();
+
             string rawHtml = client.DownloadString($"http://www.nashville.gov/Metro-Council/Metro-Council-Members/Vice-Mayor.aspx");
-            string officePattern = @"<h1>(?<office>[A-Za-z]*\s[A-Za-z]*\s?[A-Za-z]*\s?[A-Za-z]*\s?)<\/h1>";
+
+            string officePattern = @"<h1>(?<office>[A-Za-z0-9\-\s]*)<\/h1>";
             Regex officeRgx = new Regex(officePattern);
             Match officeMatch = officeRgx.Match(rawHtml);
             string office = officeMatch.Groups["office"].Value;
             viceMayor.Office = office;
-            string namePattern = @"""imgbdrright""\s\/>(?<name>[A-za-z]*\s[A-za-z]*\s?[A-za-z]*\s?[A-za-z]*\s?[A-za-z]*\s?[A-za-z]*\s?)<\/h2>";
+
+            string namePattern = @">(?<name>[A-Za-z0-9\.\'\-\s]*)<\/h2>";
             Regex nameRgx = new Regex(namePattern);
             Match nameMatch = nameRgx.Match(rawHtml);
             string name = nameMatch.Groups["name"].Value;
             viceMayor.Name = name;
-            string addressPattern = @"";
-            Regex addressRgx = new Regex(addressPattern);
-            Match addressMatch = addressRgx.Match(rawHtml);
-            string address = addressMatch.Groups["name"].Value;
-            //viceMayor.Address = address;
-            ////string phonePattern = @"";
+
+            string address = "One Public Square, Suite 204 P.O.Box 196300 Nashville, Tennessee 37219-6300";
+            viceMayor.Address = address;
+
+            string phonePattern = @"(?<phone>\(?[0-9]{3}\)?\-?\s?\.?[0-9]{3}\-?\s?\.?[0-9]{4})";
+            Regex phoneRgx = new Regex(phonePattern);
+            Match phoneMatch = phoneRgx.Match(rawHtml);
+            string phone = phoneMatch.Groups["phone"].Value;
+            viceMayor.Phone = phone;
+
+            string emailPattern = @"mailto:(?<email>[A-Za-z]*\.?[A-Za-z]*\.?[A-Za-z]*\.?[A-Za-z]*\.?@nashville.gov)";
+            Regex emailRgx = new Regex(emailPattern);
+            Match emailMatch = emailRgx.Match(rawHtml);
+            string email = emailMatch.Groups["email"].Value;
+            viceMayor.Email = email;
+
+            //string occupationPattern = @"";
+            //Regex occupationRgx = new Regex(occupationPattern);
+            //MatchCollection occupationMatch = occupationRgx.Matches(rawHtml);
+            //List<string> occupation = occupationMatch.Groups["occupation"].Value;
+            //viceMayor.Occupation = occupation;
+
+            //string familyPattern = @"";
             //Regex addressRgx = new Regex(addressPattern);
             //Match addressMatch = addressRgx.Match(rawHtml);
             //string address = addressMatch.Groups["name"].Value;
             //viceMayor.Address = address;
-            ////string emailPattern = @"";
+            //string educationPattern = @"";
             //Regex addressRgx = new Regex(addressPattern);
             //Match addressMatch = addressRgx.Match(rawHtml);
             //string address = addressMatch.Groups["name"].Value;
             //viceMayor.Address = address;
-            ////string occupationPattern = @"";
+            //string awardsPattern = @"";
             //Regex addressRgx = new Regex(addressPattern);
             //Match addressMatch = addressRgx.Match(rawHtml);
             //string address = addressMatch.Groups["name"].Value;
             //viceMayor.Address = address;
-            ////string familyPattern = @"";
+            //string experiencePattern = @"";
             //Regex addressRgx = new Regex(addressPattern);
             //Match addressMatch = addressRgx.Match(rawHtml);
             //string address = addressMatch.Groups["name"].Value;
             //viceMayor.Address = address;
-            ////string educationPattern = @"";
-            //Regex addressRgx = new Regex(addressPattern);
-            //Match addressMatch = addressRgx.Match(rawHtml);
-            //string address = addressMatch.Groups["name"].Value;
-            //viceMayor.Address = address;
-            ////string awardsPattern = @"";
-            //Regex addressRgx = new Regex(addressPattern);
-            //Match addressMatch = addressRgx.Match(rawHtml);
-            //string address = addressMatch.Groups["name"].Value;
-            //viceMayor.Address = address;
-            ////string experiencePattern = @"";
-            //Regex addressRgx = new Regex(addressPattern);
-            //Match addressMatch = addressRgx.Match(rawHtml);
-            //string address = addressMatch.Groups["name"].Value;
-            //viceMayor.Address = address;
-            ////string organizationsPattern = @"";
+            //string organizationsPattern = @"";
             //Regex addressRgx = new Regex(addressPattern);
             //Match addressMatch = addressRgx.Match(rawHtml);
             //string address = addressMatch.Groups["name"].Value;
             //viceMayor.Address = address;
             return viceMayor;
         }
-        // Kate says return an array when returning multiple CMs for other method (seed method only)
+        public CouncilMember[] seedAtLargeMembers()
+        {
+            WebClient client = new WebClient();
+            CouncilMember[] atLargeMembersArray = new CouncilMember[5];
+
+            for (var i = 1; i < 6; i++)
+            {
+                CouncilMember atLargeMember = new CouncilMember();
+                string rawHtml = client.DownloadString($"http://www.nashville.gov/Metro-Council/Metro-Council-Members/At-Large-{i}-Council-Member.aspx");
+
+                string officePattern = @"<h1>(?<office>[A-Za-z0-9\-\s]*)<\/h1>";
+                Regex officeRgx = new Regex(officePattern);
+                Match officeMatch = officeRgx.Match(rawHtml);
+                string office = officeMatch.Groups["office"].Value;
+                atLargeMember.Office = office;
+
+                string namePattern = @">(?<name>[A-Za-z0-9\.\'\-\s]*)<\/h2>";
+                Regex nameRgx = new Regex(namePattern);
+                Match nameMatch = nameRgx.Match(rawHtml);
+                string name = nameMatch.Groups["name"].Value;
+                atLargeMember.Name = name;
+
+                string address = "One Public Square, Suite 204 P.O.Box 196300 Nashville, Tennessee 37219-6300";
+                atLargeMember.Address = address;
+
+                string phonePattern = @"(?<phone>\(?[0-9]{3}\)?\-?\s?\.?[0-9]{3}\-?\s?\.?[0-9]{4})";
+                Regex phoneRgx = new Regex(phonePattern);
+                Match phoneMatch = phoneRgx.Match(rawHtml);
+                string phone = phoneMatch.Groups["phone"].Value;
+                atLargeMember.Phone = phone;
+
+                string emailPattern = @"mailto:(?<email>[A-Za-z]*\.?[A-Za-z]*\.?[A-Za-z]*\.?[A-Za-z]*\.?@nashville.gov)";
+                Regex emailRgx = new Regex(emailPattern);
+                Match emailMatch = emailRgx.Match(rawHtml);
+                string email = emailMatch.Groups["email"].Value;
+                atLargeMember.Email = email;
+
+                atLargeMembersArray[i-1] = atLargeMember;
+            }
+            return atLargeMembersArray;
+        }
+        public CouncilMember[] seedDistrictedMembers()
+        {
+            WebClient client = new WebClient();
+            CouncilMember[] districtedMembersArray = new CouncilMember[35];
+
+            for (var i = 1; i < 36; i++)
+            {
+                CouncilMember districtMember = new CouncilMember();
+                string rawHtml = client.DownloadString($"http://www.nashville.gov/Metro-Council/Metro-Council-Members/District-{i}-Council-Member.aspx");
+
+                string officePattern = @"<h1>(?<office>[A-Za-z0-9\-\s]*)<\/h1>";
+                Regex officeRgx = new Regex(officePattern);
+                Match officeMatch = officeRgx.Match(rawHtml);
+                string office = officeMatch.Groups["office"].Value;
+                districtMember.Office = office;
+
+                string namePattern = @">(?<name>[A-Za-z0-9\.\'\-\s]*)<\/h2>";
+                Regex nameRgx = new Regex(namePattern);
+                Match nameMatch = nameRgx.Match(rawHtml);
+                string name = nameMatch.Groups["name"].Value;
+                districtMember.Name = name;
+
+                string address = "One Public Square, Suite 204 P.O.Box 196300 Nashville, Tennessee 37219-6300";
+                districtMember.Address = address;
+
+                string phonePattern = @"(?<phone>\(?[0-9]{3}\)?\-?\s?\.?[0-9]{3}\-?\s?\.?[0-9]{4})";
+                Regex phoneRgx = new Regex(phonePattern);
+                Match phoneMatch = phoneRgx.Match(rawHtml);
+                string phone = phoneMatch.Groups["phone"].Value;
+                districtMember.Phone = phone;
+
+                string emailPattern = @"mailto:(?<email>[A-Za-z]*\.?[A-Za-z]*\.?[A-Za-z]*\.?[A-Za-z]*\.?@nashville.gov)";
+                Regex emailRgx = new Regex(emailPattern);
+                Match emailMatch = emailRgx.Match(rawHtml);
+                string email = emailMatch.Groups["email"].Value;
+                districtMember.Email = email;
+
+                districtedMembersArray[i - 1] = districtMember;
+            }
+            return districtedMembersArray;
+        }
     }
 }

@@ -17,9 +17,11 @@ namespace Council_Tracker.Migrations
         protected override void Seed(Council_Tracker.DAL.CTrackerContext context)
         {
             CouncilMemberData data = new CouncilMemberData();
-            context.Council_Members.AddOrUpdate(              
-                    cm => new { cm.Name, cm.Office }, new CouncilMember { Name="Billy", Office="Dog Catcher" },
-                    data.seedViceMayor()
+            context.Council_Members.AddOrUpdate(
+                    cm => new { cm.Name, cm.Office }, //Reminder, this is checking that the name and office are unique
+                    data.seedViceMayor() // Was not allowing me to seed with muliple methods from the councilmemberdata...
+                                         //data.seedAtLargeMembers()
+                                         //data.seedDistrictedMembers()
 
 
                 //at-large CMs
