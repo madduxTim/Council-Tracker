@@ -19,28 +19,46 @@ namespace Council_Tracker.DAL
                 Ordinance ordinance = new Ordinance();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{i}.htm");
 
-                string ordNumberPattern = @"";
+                string ordNumberPattern = @"<title>ORDINANCE NO. BL2016-(?<ordNumber>.*?)<\/title>";
                 Regex ordNumberRgx = new Regex(ordNumberPattern);
                 Match ordNumberMatch = ordNumberRgx.Match(rawHtml);
                 string ordNumber = ordNumberMatch.Groups["ordNumber"].Value;
                 ordinance.OrdNumber = Convert.ToInt32(ordNumber);
 
-                string bodyTextPattern = @"";
+                string bodyTextPattern = @"<p class=""ordinancecontent"">(?<body>.)*<\/p>";
                 Regex bodyTextRgx = new Regex(bodyTextPattern);
-                Match bodyTextMatch = bodyTextRgx.Match(rawHtml);
-                string bodyText = bodyTextMatch.Groups["body"].Value;
+                MatchCollection bodyTextMatch = bodyTextRgx.Matches(rawHtml);
+                List<string> textsList = new List<string>();
+                for (var j = 0; j < bodyTextMatch.Count; j++)
+                {
+                    string match = bodyTextMatch[j].ToString();
+                    textsList.Add(match);
+                }
+                string bodyText = "";
                 ordinance.Body = bodyText;
 
-                string captionPattern = @"";
+                string captionPattern = @"<\/font><\/b>(?<caption>An ordinance.*?)<\/p>";
                 Regex captionRgx = new Regex(captionPattern);
                 Match captionMatch = captionRgx.Match(rawHtml);
                 string caption = captionMatch.Groups["caption"].Value;
                 ordinance.Caption = caption;
 
-                //string sponsorPattern = @"";
+                //string exhibitURLPattern = @"";
+                //Regex exhibitURLRgx = new Regex(exhibitURLPattern);
+                //Match exhibitURLMatch = exhibitURLRgx.Match(rawHtml);
+                //string exhibitURL = bodyTextMatch.Groups["eURL"].Value;
+                //ordinance.ExhibitURL = exhibitURL;
+
+                string statusPattern = @"";
+                Regex statusRgx = new Regex(statusPattern);
+                Match statusMatch = statusRgx.Match(rawHtml);
+                string status = statusMatch.Groups["status"].Value;
+                ordinance.CurrentStatus = status;
+
+                //string sponsorPattern = @"Sponsored by: (?<sponsor>.*?)<\/p>";
                 //Regex sponsorRgx = new Regex(sponsorPattern);
                 //Match sponsorMatch = sponsorRgx.Match(rawHtml);
-                //string sponsor = sponsorMatch.Groups["name"].Value;
+                //string sponsor = sponsorMatch.Groups["sponsor"].Value; // probably need .Trim() ?? 
                 //ordinance.Sponsor = List<sponsor>;
 
                 //string codePattern = @"";
@@ -49,11 +67,6 @@ namespace Council_Tracker.DAL
                 //string codeText = codeMatch.Groups["codes"].Value;
                 //ordinance.CodeSections = codeText;
 
-                string statusPattern = @"";
-                Regex statusRgx = new Regex(statusPattern);
-                Match statusMatch = statusRgx.Match(rawHtml);
-                string status = statusMatch.Groups["status"].Value;
-                ordinance.CurrentStatus = status;
 
                 //string historyPattern = @"";
                 //Regex historyRgx = new Regex(historyPattern);
@@ -66,12 +79,6 @@ namespace Council_Tracker.DAL
                 //Match enactmentDateMatch = enactmentDateRgx.Match(rawHtml);
                 //DateTime enactmentDate = enactmentDateMatch.Groups["name"].Value;
                 //ordinance.EnactmentDate = enactmentDate;
-
-                string exhibitURLPattern = @"";
-                Regex exhibitURLRgx = new Regex(exhibitURLPattern);
-                Match exhibitURLMatch = exhibitURLRgx.Match(rawHtml);
-                string exhibitURL = bodyTextMatch.Groups["eURL"].Value;
-                ordinance.ExhibitURL = exhibitURL;
 
                 scrapedOrds[i - 1] = ordinance;
             }
