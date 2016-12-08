@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\BillData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />
     <Compile Include="DAL\CTrackerContext.cs" />
     <Compile Include="DAL\CTrackerRepository.cs" />
