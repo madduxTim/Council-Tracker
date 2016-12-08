@@ -10,5 +10,7 @@ namespace Council_Tracker.DAL
     public class CTrackerContext : ApplicationDbContext
     {
         public virtual DbSet<CouncilMember> Council_Members { get; set; }
+        public virtual DbSet<Ordinance> Ordinances { get; set; }
+        public virtual DbSet<Resolution> Resolutions { get; set; }
     }
 }

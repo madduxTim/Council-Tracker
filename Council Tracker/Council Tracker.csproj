@@ -219,11 +219,17 @@
     <Compile Include="Migrations\201612051523188_Initial.Designer.cs">
       <DependentUpon>201612051523188_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612080027305_OrdAndResTables.cs" />
+    <Compile Include="Migrations\201612080027305_OrdAndResTables.Designer.cs">
+      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Council_Member.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Ordinance.cs" />
+    <Compile Include="Models\Resolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -317,6 +323,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612051523188_Initial.resx">
       <DependentUpon>201612051523188_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612080027305_OrdAndResTables.resx">
+      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
