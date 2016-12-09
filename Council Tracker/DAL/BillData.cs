@@ -13,8 +13,8 @@ namespace Council_Tracker.DAL
         public Ordinance[] ordinanceScraper()
         {
             WebClient client = new WebClient();
-            Ordinance[] scrapedOrds = new Ordinance[6];
-            for (var i = 100; i < 105; i++)
+            Ordinance[] scrapedOrds = new Ordinance[3];
+            for (var i = 100; i < 102; i++)
             {
                 Ordinance ordinance = new Ordinance();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{i}.htm");
@@ -28,13 +28,14 @@ namespace Council_Tracker.DAL
                 string bodyTextPattern = @"<p class=""ordinancecontent"">(?<body>.)*<\/p>";
                 Regex bodyTextRgx = new Regex(bodyTextPattern);
                 MatchCollection bodyTextMatch = bodyTextRgx.Matches(rawHtml);
-                List<string> textsList = new List<string>();
+                //List<string> textsList = new List<string>();
+                string bodyText = "";
                 for (var j = 0; j < bodyTextMatch.Count; j++)
                 {
                     string match = bodyTextMatch[j].ToString();
-                    textsList.Add(match);
+                    //textsList.Add(match);
+                    bodyText += match;
                 }
-                string bodyText = "";
                 ordinance.Body = bodyText;
 
                 string captionPattern = @"<\/font><\/b>(?<caption>An ordinance.*?)<\/p>";
@@ -43,17 +44,25 @@ namespace Council_Tracker.DAL
                 string caption = captionMatch.Groups["caption"].Value;
                 ordinance.Caption = caption;
 
-                //string exhibitURLPattern = @"";
-                //Regex exhibitURLRgx = new Regex(exhibitURLPattern);
-                //Match exhibitURLMatch = exhibitURLRgx.Match(rawHtml);
-                //string exhibitURL = bodyTextMatch.Groups["eURL"].Value;
-                //ordinance.ExhibitURL = exhibitURL;
+                // NEEDS TO BE REFACTORED INTO A DICTIONARY SO THAT IT CAN CONTAIN A STRING URL AND A STRING NAME...
+                //string exhibitURLsPattern = @"<p class=""ordinancecontent""><a href=""(?< body >.)*"">(?<docName>.)*<\/a><\/p>";
+                //Regex exhibitURLsRgx = new Regex(exhibitURLsPattern);
+                //MatchCollection exhibitURLsMatch = exhibitURLsRgx.Matches(rawHtml);
+                ////List<string> textsList = new List<string>();
+                //string exhibitURLs = "";
+                //for (var j = 0; j < exhibitURLsMatch.Count; j++)
+                //{
+                //    string match = exhibitURLsMatch[j].ToString();
+                //    //textsList.Add(match);
+                //    exhibitURLs += match;
+                //}
+                //ordinance.Body = exhibitURLs;
 
-                string statusPattern = @"";
-                Regex statusRgx = new Regex(statusPattern);
-                Match statusMatch = statusRgx.Match(rawHtml);
-                string status = statusMatch.Groups["status"].Value;
-                ordinance.CurrentStatus = status;
+                //string statusPattern = @"";
+                //Regex statusRgx = new Regex(statusPattern);
+                //Match statusMatch = statusRgx.Match(rawHtml);
+                //string status = statusMatch.Groups["status"].Value;
+                //ordinance.CurrentStatus = status;
 
                 //string sponsorPattern = @"Sponsored by: (?<sponsor>.*?)<\/p>";
                 //Regex sponsorRgx = new Regex(sponsorPattern);
@@ -80,7 +89,7 @@ namespace Council_Tracker.DAL
                 //DateTime enactmentDate = enactmentDateMatch.Groups["name"].Value;
                 //ordinance.EnactmentDate = enactmentDate;
 
-                scrapedOrds[i - 1] = ordinance;
+                scrapedOrds[i - 100] = ordinance;
             }
             return scrapedOrds;
         }
