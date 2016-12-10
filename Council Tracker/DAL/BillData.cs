@@ -10,20 +10,29 @@ namespace Council_Tracker.DAL
 {
     public class BillData
     {
+        public int latestOrdinanceNumber = 0;
+        public void highestOrdNumCollector()
+        {
+            WebClient client = new WebClient();
+            string indexHTML = client.DownloadString($"http://www.nashville.gov/Metro-Clerk/Legislative/Ordinances/2015-2019.aspx");
+            string ordNumberPattern = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/ordinances\/term_2015_2019\/bl2016_(?<num>.*?)\.htm"">";
+            Regex ordNumberRgx = new Regex(ordNumberPattern);
+            MatchCollection ordNumberMatch = ordNumberRgx.Matches(indexHTML);
+            string ordNumber = ordNumberMatch[0].Groups["num"].Value; 
+            int highest = Convert.ToInt32(ordNumber);
+            latestOrdinanceNumber = highest-100; // 100 Reflects the number of Ords from the previous year
+        }
         public Ordinance[] ordinanceScraper()
         {
             WebClient client = new WebClient();
-            Ordinance[] scrapedOrds = new Ordinance[3];
-            for (var i = 100; i < 102; i++)
+            highestOrdNumCollector();
+            Ordinance[] scrapedOrds = new Ordinance[latestOrdinanceNumber];
+            for (var i = 100; i < latestOrdinanceNumber+1; i++) 
             {
                 Ordinance ordinance = new Ordinance();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{i}.htm");
 
-                string ordNumberPattern = @"<title>ORDINANCE NO. BL2016-(?<ordNumber>.*?)<\/title>";
-                Regex ordNumberRgx = new Regex(ordNumberPattern);
-                Match ordNumberMatch = ordNumberRgx.Match(rawHtml);
-                string ordNumber = ordNumberMatch.Groups["ordNumber"].Value;
-                ordinance.OrdNumber = Convert.ToInt32(ordNumber);
+                ordinance.OrdNumber = i; 
 
                 string bodyTextPattern = @"<p class=""ordinancecontent"">(?<body>.)*<\/p>";
                 Regex bodyTextRgx = new Regex(bodyTextPattern);
@@ -93,5 +102,9 @@ namespace Council_Tracker.DAL
             }
             return scrapedOrds;
         }
+        //public void billscrapeCleaner()
+        //{
+            //Ideally this goes in the middle of ordinance scrape to clean up the body text. Keep an eye out for bills that include docs/graphs/tables, etc. Need to know how to handle. 
+        //}
     }
 }
