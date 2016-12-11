@@ -209,10 +209,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DAL\BillData.cs" />
+    <Compile Include="DAL\OrdinanceData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />
     <Compile Include="DAL\CTrackerContext.cs" />
     <Compile Include="DAL\CTrackerRepository.cs" />
+    <Compile Include="DAL\ResolutionData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

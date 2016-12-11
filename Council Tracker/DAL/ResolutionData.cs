@@ -8,31 +8,32 @@ using System.Web;
 
 namespace Council_Tracker.DAL
 {
-    public class BillData
-    {
-        public int latestOrdinanceNumber = 0;
-        public void highestOrdNumCollector()
-        {
-            WebClient client = new WebClient();
-            string indexHTML = client.DownloadString($"http://www.nashville.gov/Metro-Clerk/Legislative/Ordinances/2015-2019.aspx");
-            string ordNumberPattern = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/ordinances\/term_2015_2019\/bl2016_(?<num>.*?)\.htm"">";
-            Regex ordNumberRgx = new Regex(ordNumberPattern);
-            MatchCollection ordNumberMatch = ordNumberRgx.Matches(indexHTML);
-            string ordNumber = ordNumberMatch[0].Groups["num"].Value; 
-            int highest = Convert.ToInt32(ordNumber);
-            latestOrdinanceNumber = highest-100; // 100 Reflects the number of Ords from the previous year
-        }
-        public Ordinance[] ordinanceScraper()
-        {
-            WebClient client = new WebClient();
-            highestOrdNumCollector();
-            Ordinance[] scrapedOrds = new Ordinance[latestOrdinanceNumber];
-            for (var i = 100; i < latestOrdinanceNumber+1; i++) 
-            {
-                Ordinance ordinance = new Ordinance();
-                string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{i}.htm");
 
-                ordinance.OrdNumber = i; 
+    public class ResolutionData
+    {
+        public int latestResolutionNumber = 0;
+        public void highestResNumCollector()
+        {
+            WebClient client = new WebClient();
+            string indexHTML = client.DownloadString($"http://www.nashville.gov/Metro-Clerk/Legislative/Resolutions/2015-2019.aspx");
+            string resNumberPattern = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs2016_(?<num>.*?)\.htm"">";
+            Regex resNumberRgx = new Regex(resNumberPattern);
+            MatchCollection resNumberMatch = resNumberRgx.Matches(indexHTML);
+            string resNumber = resNumberMatch[0].Groups["num"].Value;
+            int highest = Convert.ToInt32(resNumber);
+            latestResolutionNumber = highest - 76; // 76 Reflects the number of Ords from the previous year
+        }
+        public Resolution[] resolutionScraper()
+        {
+            WebClient client = new WebClient();
+            highestResNumCollector();
+            Resolution[] scrapedResolutions = new Resolution[latestResolutionNumber];
+            for (var i = 76; i < latestResolutionNumber + 1; i++)
+            {
+                Resolution resolution = new Resolution();
+                string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm");
+
+                resolution.ResNumber = i;
 
                 string bodyTextPattern = @"<p class=""ordinancecontent"">(?<body>.)*<\/p>";
                 Regex bodyTextRgx = new Regex(bodyTextPattern);
@@ -45,13 +46,13 @@ namespace Council_Tracker.DAL
                     //textsList.Add(match);
                     bodyText += match;
                 }
-                ordinance.Body = bodyText;
+                resolution.Body = bodyText;
 
-                string captionPattern = @"<\/font><\/b>(?<caption>An ordinance.*?)<\/p>";
+                string captionPattern = @"<\/font><\/b>(?<caption>An resolution.*?)<\/p>";
                 Regex captionRgx = new Regex(captionPattern);
                 Match captionMatch = captionRgx.Match(rawHtml);
                 string caption = captionMatch.Groups["caption"].Value;
-                ordinance.Caption = caption;
+                resolution.Caption = caption;
 
                 // NEEDS TO BE REFACTORED INTO A DICTIONARY SO THAT IT CAN CONTAIN A STRING URL AND A STRING NAME...
                 //string exhibitURLsPattern = @"<p class=""ordinancecontent""><a href=""(?< body >.)*"">(?<docName>.)*<\/a><\/p>";
@@ -65,46 +66,46 @@ namespace Council_Tracker.DAL
                 //    //textsList.Add(match);
                 //    exhibitURLs += match;
                 //}
-                //ordinance.Body = exhibitURLs;
+                //resolution.Body = exhibitURLs;
 
                 //string statusPattern = @"";
                 //Regex statusRgx = new Regex(statusPattern);
                 //Match statusMatch = statusRgx.Match(rawHtml);
                 //string status = statusMatch.Groups["status"].Value;
-                //ordinance.CurrentStatus = status;
+                //resolution.CurrentStatus = status;
 
                 //string sponsorPattern = @"Sponsored by: (?<sponsor>.*?)<\/p>";
                 //Regex sponsorRgx = new Regex(sponsorPattern);
                 //Match sponsorMatch = sponsorRgx.Match(rawHtml);
                 //string sponsor = sponsorMatch.Groups["sponsor"].Value; // probably need .Trim() ?? 
-                //ordinance.Sponsor = List<sponsor>;
+                //resolution.Sponsor = List<sponsor>;
 
                 //string codePattern = @"";
                 //Regex codeRgx = new Regex(codePattern);
                 //Match codeMatch = codeRgx.Match(rawHtml);
                 //string codeText = codeMatch.Groups["codes"].Value;
-                //ordinance.CodeSections = codeText;
+                //resolution.CodeSections = codeText;
 
 
                 //string historyPattern = @"";
                 //Regex historyRgx = new Regex(historyPattern);
                 //Match historyMatch = historyRgx.Match(rawHtml);
                 //string history = historyMatch.Groups["history"].Value;
-                //ordinance.History = history;
+                //resolution.History = history;
 
                 //string enactmentDatePattern = @"";
                 //Regex enactmentDateRgx = new Regex(enactmentDatePattern);
                 //Match enactmentDateMatch = enactmentDateRgx.Match(rawHtml);
                 //DateTime enactmentDate = enactmentDateMatch.Groups["name"].Value;
-                //ordinance.EnactmentDate = enactmentDate;
+                //resolution.EnactmentDate = enactmentDate;
 
-                scrapedOrds[i - 100] = ordinance;
+                scrapedResolutions[i - 76] = resolution;
             }
-            return scrapedOrds;
+            return scrapedResolutions;
         }
         //public void billscrapeCleaner()
         //{
-            //Ideally this goes in the middle of ordinance scrape to clean up the body text. Keep an eye out for bills that include docs/graphs/tables, etc. Need to know how to handle. 
+        //Ideally this goes in the middle of resolution scrape to clean up the body text. Keep an eye out for bills that include docs/graphs/tables, etc. Need to know how to handle. 
         //}
     }
 }
