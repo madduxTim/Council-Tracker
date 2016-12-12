@@ -21,38 +21,61 @@ namespace Council_Tracker.DAL
             MatchCollection resNumberMatch = resNumberRgx.Matches(indexHTML);
             string resNumber = resNumberMatch[0].Groups["num"].Value;
             int highest = Convert.ToInt32(resNumber);
-            latestResolutionNumber = highest - 76; // 76 Reflects the number of Ords from the previous year
+            latestResolutionNumber = highest - 77; // 76 Reflects the number of Ords from the previous year
         }
         public Resolution[] resolutionScraper()
         {
             WebClient client = new WebClient();
             highestResNumCollector();
             Resolution[] scrapedResolutions = new Resolution[latestResolutionNumber];
-            for (var i = 76; i < latestResolutionNumber + 1; i++)
+            for (var i = 77; i < latestResolutionNumber + 1; i++)
             {
                 Resolution resolution = new Resolution();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm");
 
                 resolution.ResNumber = i;
 
-                string bodyTextPattern = @"<p class=""ordinancecontent"">(?<body>.)*<\/p>";
+                string bodyTextPattern = @"<p class=""LEGISLATION"">(?<body>.)*<\/p>";
                 Regex bodyTextRgx = new Regex(bodyTextPattern);
                 MatchCollection bodyTextMatch = bodyTextRgx.Matches(rawHtml);
-                //List<string> textsList = new List<string>();
                 string bodyText = "";
                 for (var j = 0; j < bodyTextMatch.Count; j++)
                 {
                     string match = bodyTextMatch[j].ToString();
-                    //textsList.Add(match);
                     bodyText += match;
+                }
+                if (bodyText == "")
+                {
+                    string altBodyTextPattern = @"<p><font\ssize=""2""(.*)?<\/p>";
+                    Regex altBodyTextRgx = new Regex(altBodyTextPattern);
+                    MatchCollection altBodyTextMatch = altBodyTextRgx.Matches(rawHtml);
+                    for (var k = 0; k < altBodyTextMatch.Count; k++)
+                    {
+                        string altMatch = altBodyTextMatch[k].ToString();
+                        bodyText += altMatch;
+                    }
                 }
                 resolution.Body = bodyText;
 
-                string captionPattern = @"<\/font><\/b>(?<caption>An resolution.*?)<\/p>";
+                string captionPattern = @"<p class=""SUMMARY"">.*\s\S?(?<summary>.*?)<\/p>";
                 Regex captionRgx = new Regex(captionPattern);
                 Match captionMatch = captionRgx.Match(rawHtml);
-                string caption = captionMatch.Groups["caption"].Value;
-                resolution.Caption = caption;
+                string summary = captionMatch.Groups["summary"].Value;
+                if (summary == "")
+                {
+                    string altCaptionPattern = @"<p\salign=""center"">\s?(?<summary>.*?)<\/p>";
+                    Regex altCaptionRgx = new Regex(altCaptionPattern);
+                    Match altCaptionMatch = altCaptionRgx.Match(rawHtml);
+                    summary = altCaptionMatch.Groups["summary"].Value;
+                }
+                if (summary == "")
+                {
+                    string altCaptionPattern = @"<p><font\ssize=""-1"">(?<summary>.*?)?<\/p>";
+                    Regex altCaptionRgx = new Regex(altCaptionPattern);
+                    Match altCaptionMatch = altCaptionRgx.Match(rawHtml);
+                    summary = altCaptionMatch.Groups["summary"].Value;
+                }
+                resolution.Caption = summary;
 
                 // NEEDS TO BE REFACTORED INTO A DICTIONARY SO THAT IT CAN CONTAIN A STRING URL AND A STRING NAME...
                 //string exhibitURLsPattern = @"<p class=""ordinancecontent""><a href=""(?< body >.)*"">(?<docName>.)*<\/a><\/p>";
@@ -99,7 +122,7 @@ namespace Council_Tracker.DAL
                 //DateTime enactmentDate = enactmentDateMatch.Groups["name"].Value;
                 //resolution.EnactmentDate = enactmentDate;
 
-                scrapedResolutions[i - 76] = resolution;
+                scrapedResolutions[i - 77] = resolution;
             }
             return scrapedResolutions;
         }

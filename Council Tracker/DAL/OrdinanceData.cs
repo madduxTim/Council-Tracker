@@ -11,7 +11,7 @@ namespace Council_Tracker.DAL
 
     public class OrdinanceData
     {
-        public int latestOrdinanceNumber = 0;
+        public int numberOf2016Ords = 0;
         public void highestOrdNumCollector()
         {
             WebClient client = new WebClient();
@@ -20,15 +20,15 @@ namespace Council_Tracker.DAL
             Regex ordNumberRgx = new Regex(ordNumberPattern);
             MatchCollection ordNumberMatch = ordNumberRgx.Matches(indexHTML);
             string ordNumber = ordNumberMatch[0].Groups["num"].Value; 
-            int highest = Convert.ToInt32(ordNumber);
-            latestOrdinanceNumber = highest-100; // 100 Reflects the number of Ords from the previous year
+            int highest = Convert.ToInt32(ordNumber);  // this is the number of all the ordinances on the page above
+            numberOf2016Ords = highest-99; // 100 Reflects the number of Ords from the previous year (i.e. BL2016_100 is the first ordinance of 2016)
         }
         public Ordinance[] ordinanceScraper()
         {
             WebClient client = new WebClient();
             highestOrdNumCollector();
-            Ordinance[] scrapedOrds = new Ordinance[latestOrdinanceNumber];
-            for (var i = 100; i < latestOrdinanceNumber+1; i++) 
+            Ordinance[] scrapedOrds = new Ordinance[numberOf2016Ords];
+            for (var i = 99; i < numberOf2016Ords+99; i++) 
             {
                 Ordinance ordinance = new Ordinance();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{i}.htm");
@@ -99,7 +99,7 @@ namespace Council_Tracker.DAL
                 //DateTime enactmentDate = enactmentDateMatch.Groups["name"].Value;
                 //ordinance.EnactmentDate = enactmentDate;
 
-                scrapedOrds[i - 100] = ordinance;
+                scrapedOrds[i - 99] = ordinance;
             }
             return scrapedOrds;
         }

@@ -16,10 +16,10 @@ namespace Council_Tracker.Controllers
             //var AtLarges = data.seedAtLargeMembers();
             //var districtMembers = data.seedDistrictedMembers();
             OrdinanceData bills = new OrdinanceData();
-            ResolutionData resols = new ResolutionData();
-            //bills.highestOrdNumCollector();
-            //var ords = bills.ordinanceScraper();
-            var data = resols.resolutionScraper();
+            //ResolutionData resols = new ResolutionData();
+            bills.highestOrdNumCollector();
+            var ords = bills.ordinanceScraper();
+            //var data = resols.resolutionScraper();
             //var highest = bills.highestOrdinanceNumber;
             return View();
         }
