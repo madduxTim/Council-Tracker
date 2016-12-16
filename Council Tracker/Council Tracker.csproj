@@ -209,9 +209,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\OrdinanceData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />
     <Compile Include="DAL\CTrackerContext.cs" />
     <Compile Include="DAL\CTrackerRepository.cs" />
+    <Compile Include="DAL\ResolutionData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,11 +221,29 @@
     <Compile Include="Migrations\201612051523188_Initial.Designer.cs">
       <DependentUpon>201612051523188_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612080027305_OrdAndResTables.cs" />
+    <Compile Include="Migrations\201612080027305_OrdAndResTables.Designer.cs">
+      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.cs" />
+    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.Designer.cs">
+      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612130313525_RefactSeedMethod.cs" />
+    <Compile Include="Migrations\201612130313525_RefactSeedMethod.Designer.cs">
+      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.cs" />
+    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.Designer.cs">
+      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Council_Member.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Ordinance.cs" />
+    <Compile Include="Models\Resolution.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -317,6 +337,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612051523188_Initial.resx">
       <DependentUpon>201612051523188_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612080027305_OrdAndResTables.resx">
+      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612122004234_RefactoredForXMLReader.resx">
+      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612130313525_RefactSeedMethod.resx">
+      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612150141320_NullableDateTimeModels.resx">
+      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
