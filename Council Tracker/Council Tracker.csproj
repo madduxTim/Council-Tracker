@@ -225,6 +225,18 @@
     <Compile Include="Migrations\201612080027305_OrdAndResTables.Designer.cs">
       <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.cs" />
+    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.Designer.cs">
+      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612130313525_RefactSeedMethod.cs" />
+    <Compile Include="Migrations\201612130313525_RefactSeedMethod.Designer.cs">
+      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.cs" />
+    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.Designer.cs">
+      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Council_Member.cs" />
@@ -328,6 +340,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612080027305_OrdAndResTables.resx">
       <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612122004234_RefactoredForXMLReader.resx">
+      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612130313525_RefactSeedMethod.resx">
+      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612150141320_NullableDateTimeModels.resx">
+      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
