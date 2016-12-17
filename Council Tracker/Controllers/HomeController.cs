@@ -11,16 +11,6 @@ namespace Council_Tracker.Controllers
     {
         public ActionResult Index()
         {
-            //CouncilMemberData data = new CouncilMemberData(); // Using this to test data from the seeding councilmember with a breakpoint
-            //var ViceMayor = data.seedViceMayor();
-            //var AtLarges = data.seedAtLargeMembers();
-            //var districtMembers = data.seedDistrictedMembers();
-            //OrdinanceData bills = new OrdinanceData();
-            //ResolutionData resols = new ResolutionData();
-            //bills.highestOrdNumCollector();
-            //resols.highestResNumCollector();
-            //var ords = bills.ordinanceScraper();
-            //var data = resols.resolutionScraper();
             return View();
         }
 
@@ -39,19 +29,19 @@ namespace Council_Tracker.Controllers
         }
         public ActionResult Ordinances()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
 
             return View();
         }
         public ActionResult Resolutions()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
 
             return View();
         }
         public ActionResult Council_Members()
         {
-            ViewBag.Message = "Your contact page.";
+            //ViewBag.Message = "Your contact page.";
 
             return View();
         }
