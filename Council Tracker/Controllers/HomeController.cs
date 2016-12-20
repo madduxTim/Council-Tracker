@@ -27,7 +27,7 @@ namespace Council_Tracker.Controllers
 
             return View();
         }
-        public ActionResult Ordinances()
+        public ActionResult OrdinancesIndex()
         {
             //ViewBag.Message = "Your contact page.";
 
@@ -43,6 +43,11 @@ namespace Council_Tracker.Controllers
         {
             //ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Ordinance()
+        {
             return View();
         }
     }

@@ -8,7 +8,8 @@
 <div class="container" ng-controller="OrdsCTRL">
     <ul>
         <li class="list-group-item" ng-repeat="ord in getOrds()">
-            <a href="">{{ord.OrdNumber}}</a>
+            @*@Html.ActionLink("Ordinance No. {{ord.OrdNumber}}", "Ordinance/{{ord.Ordnumber}}", "Home")*@
+            @Html.ActionLink("{{ord.OrdNumber}}", "Ordinance", "Home")
         </li>
     </ul>
 

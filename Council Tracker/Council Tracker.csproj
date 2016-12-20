@@ -325,9 +325,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Ordinances.cshtml" />
+    <Content Include="Views\Home\OrdinancesIndex.cshtml" />
     <Content Include="Views\Home\Resolutions.cshtml" />
     <Content Include="Views\Home\Council_Members.cshtml" />
+    <Content Include="Views\Home\Ordinance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,12 +29,16 @@ namespace Council_Tracker.Tests.DAL
             mock_resolutions = new Mock<DbSet<Resolution>>();
             mock_ords = new Mock<DbSet<Ordinance>>();
             mock_app_users = new Mock<DbSet<ApplicationUser>>();
-            repo = new CTrackerRepository();
+
             mock_context = new Mock<CTrackerContext>();
+            //repo = new CTrackerRepository(mock_context.Object);
+            repo = new CTrackerRepository();
+
             faux_app_users = new List<ApplicationUser>();
             faux_ord_list = new List<Ordinance>();
             faux_res_list = new List<Resolution>();
             faux_member_list = new List<CouncilMember>();
+            ConnectToDatastore();
         }
           
         public void ConnectToDatastore()
@@ -68,48 +72,67 @@ namespace Council_Tracker.Tests.DAL
         [TestMethod]
         public void CanCreateRepoInstance()
         {
-            CTrackerRepository repo = new CTrackerRepository();
             Assert.IsNotNull(repo);
         }
+
+        [TestMethod]
+        public void canReturnOrdList()
+        {
+            List<Ordinance> list = repo.GetOrds();
+            Assert.IsNotNull(list);
+        }
+
+        [TestMethod]
+        public void canReturnResList()
+        {
+            List<Resolution> list = repo.GetResolutions();
+            Assert.IsNotNull(list);
+        }
+
+
+        [TestMethod]
+        public void canReturnMemList()
+        {
+            List<CouncilMember> list = repo.GetMembers();
+            Assert.IsNotNull(list);
+        }
+
 
         [TestMethod]
         public void CanGetOrds()
         {
             //Arrange 
-            ConnectToDatastore();
             Ordinance ord = new Ordinance { Body = "blah", OrdNumber = 1 };
             //Act
             repo.ManuallyAddOrd(ord);
             int expected = 1;
-            var actual = repo.GetOrds();
+            int actual = repo.GetOrds().Count();
             //Assert
-            Assert.AreEqual(expected, actual.Count());
+            Assert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void CanGetResolutions()
         {
             //Arrange
-            ConnectToDatastore();
             Resolution res = new Resolution { Body = "blahblah", ResNumber = 5 };
             //Act
             repo.ManuallyAddRes(res);
             int expected = 1;
-            var actual = repo.GetResolutions();
+            int actual = repo.GetResolutions().Count();
             //Assert
-            Assert.AreEqual(expected, actual.Count());
+            Assert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void CanGetMembers()
         {
             //Arrange
-            ConnectToDatastore();
             CouncilMember mem = new CouncilMember { Name = "tobey", ID = 100, Office = "vice mayor" };
             //Act
             repo.ManuallyAddMember(mem);
             int expected = 1;
-            var actual = repo.GetMembers();
+            int actual = repo.GetMembers().Count();
             //Assert
-            Assert.AreEqual(expected, actual.Count());
+            Assert.AreEqual(expected, actual);
         }
     }
 }
