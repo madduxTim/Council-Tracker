@@ -15,10 +15,10 @@ namespace Council_Tracker.Models
         [Required]
         public string Body { get; set; }
         public string Caption { get; set; }
-        public List<CouncilMember> Sponsor { get; set; }
-        public List<int> CodeSections { get; set; }
+        public virtual List<CouncilMember> Sponsor { get; set; }
+        public virtual List<int> CodeSections { get; set; }
         public string CurrentStatus { get; set; }
-        public Dictionary<string, DateTime> History { get; set; }
+        public virtual Dictionary<string, DateTime> History { get; set; }
         public DateTime? EnactmentDate { get; set; }
         public string ExhibitURL { get; set; }
     }

@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdinanceController.cs" />
     <Compile Include="DAL\OrdinanceData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />
     <Compile Include="DAL\CTrackerContext.cs" />
@@ -324,6 +325,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\OrdinancesIndex.cshtml" />
+    <Content Include="Views\Home\Resolutions.cshtml" />
+    <Content Include="Views\Home\Council_Members.cshtml" />
+    <Content Include="Views\Home\Ordinance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
