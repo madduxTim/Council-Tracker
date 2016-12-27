@@ -3,29 +3,29 @@
 //Route Config 
 app.config(function ($routeProvider) {
     $routeProvider.
-        when("/index", {
-            templateUrl: "/NgPartials/_index.html",
-            controller: "IndexCTRL"
+        when("/landing", {
+            templateUrl: "NgPartials/_landing.html",
+            controller: "LandingCTRL"
         }).
         when("/ordinance/:ordinanceNumber", {
             templateUrl: "/NgPartials/_ordinance.html",
-            controller: "IndexCTRL"
+            controller: "LandingCTRL"
         }).
         when("/resolution/:resolutionNumber", {
             templateUrl: "/NgPartials/_resolution.html",
-            controller: "IndexCTRL"
+            controller: "LandingCTRL"
         }).
         when("/councilmember/:office", {
             templateUrl: "/NgPartials/_council-member.html",
             controller: "CouncilMemberCTRL"
-        });
-    //otherwise("/index");
+        }).
+    otherwise("/landing");
 });
 
 //Controllers
-app.controller("IndexCTRL", function ($scope, $http) {
+app.controller("LandingCTRL", function ($scope, $http) {
     $scope.test = () => {
-        console.log("hey cowpoke. you've got the IndexCTRL working.");
+        console.log("hey cowpoke. you've got the LandingCTRL working.");
     }
     $scope.ords = [];
     $scope.running = false;

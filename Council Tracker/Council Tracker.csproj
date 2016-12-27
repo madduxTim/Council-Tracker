@@ -328,10 +328,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\NgPartials\_ordinance.cshtml" />
-    <Content Include="Views\NgPartials\_index.cshtml" />
-    <Content Include="Views\NgPartials\_resolution.cshtml" />
-    <Content Include="Views\NgPartials\_council-member.cshtml" />
+    <Content Include="NgPartials\_ordinance.cshtml" />
+    <Content Include="NgPartials\_landing.html" />
+    <Content Include="NgPartials\_resolution.cshtml" />
+    <Content Include="NgPartials\_council-member.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
