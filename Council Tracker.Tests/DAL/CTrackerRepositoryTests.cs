@@ -32,8 +32,6 @@ namespace Council_Tracker.Tests.DAL
 
             mock_context = new Mock<CTrackerContext>();
             repo = new CTrackerRepository(mock_context.Object);
-            //repo = new CTrackerRepository();
-
             faux_app_users = new List<ApplicationUser>();
             faux_ord_list = new List<Ordinance>();
             faux_res_list = new List<Resolution>();
