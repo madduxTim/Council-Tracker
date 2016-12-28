@@ -3,27 +3,37 @@
 //Route Config 
 app.config(function ($routeProvider) {
     $routeProvider.
-        when("/landing", {
-            templateUrl: "NgPartials/_landing.html",
-            controller: "LandingCTRL"
+        when("/Ordinance", {
+            templateUrl: "NgPartials/_ordinance.html",
+            controller: "OrdinanceCTRL"
         }).
-        when("/ordinance/:ordinanceNumber", {
-            templateUrl: "/NgPartials/_ordinance.html",
-            controller: "LandingCTRL"
+        when("/Resolution", {
+            templateUrl: "NgPartials/_resolution.html",
+            controller: "ResolutionCTRL"
         }).
-        when("/resolution/:resolutionNumber", {
-            templateUrl: "/NgPartials/_resolution.html",
-            controller: "LandingCTRL"
-        }).
-        when("/councilmember/:office", {
-            templateUrl: "/NgPartials/_council-member.html",
+        when("/CouncilMember", {
+            templateUrl: "NgPartials/_council-member.html",
             controller: "CouncilMemberCTRL"
-        }).
-    otherwise("/landing");
+        });
+
+        //when("/ordinance/:ordinanceNumber", {
+        //    templateUrl: "/NgPartials/_ordinance.html",
+        //    controller: "LandingCTRL"
+        //}).
+        //when("/resolution/:resolutionNumber", {
+        //    templateUrl: "/NgPartials/_resolution.html",
+        //    controller: "LandingCTRL"
+        //}).
+        //when("/councilmember/:office", {
+        //    templateUrl: "/NgPartials/_council-member.html",
+        //    controller: "CouncilMemberCTRL"
+        //}).
+    //otherwise("/ordinance");
+
 });
 
 //Controllers
-app.controller("LandingCTRL", function ($scope, $http) {
+app.controller("OrdinanceCTRL", function ($scope, $http) {
     $scope.test = () => {
         console.log("hey cowpoke. you've got the LandingCTRL working.");
     }
@@ -42,6 +52,12 @@ app.controller("LandingCTRL", function ($scope, $http) {
         }
         return $scope.ords;
     };
+});
+
+app.controller("ResolutionCTRL", function ($scope) {
+    $scope.test = () => {
+        console.log("hey, here's the ResolutionCTRL .");
+    }
 });
 
 app.controller("CouncilMemberCTRL", function ($scope) {
