@@ -1,16 +1,16 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div class="jumbotron">
+<div class="jumbotron" ng-controller="NgNavCTRL">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">Ordinances</button>
+            <button type="button" class="btn btn-default" ng-click="showOrds()">Ordinances</button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">Resolutions</button>
+            <button type="button" class="btn btn-default" ng-click="showOrds()">Resolutions</button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">Council Members</button>
+            <button type="button" class="btn btn-default" ng-click="showOrds()">Council Members</button>
         </div>
     </div>
 </div>
