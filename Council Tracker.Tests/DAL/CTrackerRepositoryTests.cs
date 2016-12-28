@@ -108,6 +108,18 @@ namespace Council_Tracker.Tests.DAL
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CanGetSingleOrd()
+        {
+            int ordnumber = 150;
+            Ordinance ord = new Ordinance { Body = "blah", OrdNumber = 150 };
+            repo.ManuallyAddOrd(ord);
+            Ordinance singleOrd = repo.GetSingleOrd(ordnumber);
+            int expected = ord.OrdNumber;
+            Assert.AreEqual(expected, singleOrd.OrdNumber);
+        }
+
         [TestMethod]
         public void CanGetResolutions()
         {

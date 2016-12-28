@@ -14,12 +14,11 @@ app.config(function ($routeProvider) {
         when("/CouncilMember", {
             templateUrl: "NgPartials/_council-member.html",
             controller: "CouncilMemberCTRL"
+        }).
+        when("/Ordinance/:ordinanceNumber", {
+            templateUrl: "/NgPartials/_ordinance-template.html",
+            controller: "OrdinanceCTRL"
         });
-
-        //when("/ordinance/:ordinanceNumber", {
-        //    templateUrl: "/NgPartials/_ordinance.html",
-        //    controller: "LandingCTRL"
-        //}).
         //when("/resolution/:resolutionNumber", {
         //    templateUrl: "/NgPartials/_resolution.html",
         //    controller: "LandingCTRL"

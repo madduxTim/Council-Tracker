@@ -49,5 +49,11 @@ namespace Council_Tracker.DAL
         {
             return Context.Council_Members.ToList();
         }
+
+        public Ordinance GetSingleOrd(int ordnumber)
+        {
+            Ordinance ord = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordnumber);
+            return ord;
+        }
     }
 }
