@@ -18,6 +18,11 @@ namespace Council_Tracker.Controllers
             return repo.GetOrds();
         }
 
+        public Ordinance Get(int id)
+        {
+            return repo.GetSingleOrd(id);
+        }
+
         // GET api/<controller>/5
         //public string Get(int id)
         //{

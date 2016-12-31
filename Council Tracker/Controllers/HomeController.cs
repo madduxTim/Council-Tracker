@@ -27,28 +27,5 @@ namespace Council_Tracker.Controllers
 
             return View();
         }
-        public ActionResult OrdinancesIndex()
-        {
-            //ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult Resolutions()
-        {
-            //ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult Council_Members()
-        {
-            //ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        public ActionResult Ordinance()
-        {
-            return View();
-        }
     }
 }

@@ -25,7 +25,11 @@ namespace Council_Tracker
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
-                      "~/Scripts/app.js"));
+                      "~/Scripts/NgResources/app.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular-route").Include(
+                      "~/Scripts/angular-route.js",
+                      "~/Scripts/NgResources/app.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

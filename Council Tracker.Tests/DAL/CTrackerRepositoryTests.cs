@@ -31,9 +31,7 @@ namespace Council_Tracker.Tests.DAL
             mock_app_users = new Mock<DbSet<ApplicationUser>>();
 
             mock_context = new Mock<CTrackerContext>();
-            //repo = new CTrackerRepository(mock_context.Object);
-            repo = new CTrackerRepository();
-
+            repo = new CTrackerRepository(mock_context.Object);
             faux_app_users = new List<ApplicationUser>();
             faux_ord_list = new List<Ordinance>();
             faux_res_list = new List<Resolution>();
@@ -110,6 +108,18 @@ namespace Council_Tracker.Tests.DAL
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CanGetSingleOrd()
+        {
+            int ordnumber = 150;
+            Ordinance ord = new Ordinance { Body = "blah", OrdNumber = 150 };
+            repo.ManuallyAddOrd(ord);
+            Ordinance singleOrd = repo.GetSingleOrd(ordnumber);
+            int expected = ord.OrdNumber;
+            Assert.AreEqual(expected, singleOrd.OrdNumber);
+        }
+
         [TestMethod]
         public void CanGetResolutions()
         {

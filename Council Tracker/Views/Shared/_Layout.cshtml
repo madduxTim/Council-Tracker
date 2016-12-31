@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body ng-app="CouncilTracker">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -24,15 +24,12 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Ordinances", "OrdinancesIndex", "Home")</li>
-                    <li>@Html.ActionLink("Resolutions", "Resolutions", "Home")</li>
-                    <li>@Html.ActionLink("Council Members", "Council_Members", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="container body-content" ng-app="CouncilTracker">
+    <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
@@ -43,6 +40,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular-route")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/Scripts/NgResources/Controllers/OrdinanceCTRL.js"></script>
+    <script type="text/javascript" src="~/Scripts/NgResources/Controllers/ResolutionCTRL.js"></script>
+    <script type="text/javascript" src="~/Scripts/NgResources/Controllers/CouncilMemberCTRL.js"></script>
+    <script type="text/javascript" src="~/Scripts/NgResources/Controllers/NgNavCTRL.js"></script>
 </body>
 </html>
