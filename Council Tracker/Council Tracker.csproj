@@ -238,6 +238,10 @@
     <Compile Include="Migrations\201612150141320_NullableDateTimeModels.Designer.cs">
       <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701032047084_Year&amp;PhotoURL.cs" />
+    <Compile Include="Migrations\201701032047084_Year&amp;PhotoURL.Designer.cs">
+      <DependentUpon>201701032047084_Year&amp;PhotoURL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Council_Member.cs" />
@@ -361,6 +365,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612150141320_NullableDateTimeModels.resx">
       <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701032047084_Year&amp;PhotoURL.resx">
+      <DependentUpon>201701032047084_Year&amp;PhotoURL.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

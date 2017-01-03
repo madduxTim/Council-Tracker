@@ -25,6 +25,12 @@ namespace Council_Tracker.DAL
             string office = officeMatch.Groups["office"].Value;
             viceMayor.Office = office;
 
+            string photoPattern = @"images\/members\/(?<photo>.*?)"">";
+            Regex photoRgx = new Regex(photoPattern);
+            Match photoMatch = photoRgx.Match(rawHtml);
+            string photo = photoMatch.Groups["photo"].Value;
+            viceMayor.PhotoURL = "http://www.nashville.gov/portals/0/SiteContent/Council/images/members/" + photo;
+
             string namePattern = @">(?<name>[A-Za-z0-9\.\'\-\s]*)<\/h2>";
             Regex nameRgx = new Regex(namePattern);
             Match nameMatch = nameRgx.Match(rawHtml);
@@ -95,6 +101,12 @@ namespace Council_Tracker.DAL
                 string office = officeMatch.Groups["office"].Value;
                 atLargeMember.Office = office;
 
+                string photoPattern = @"<img\ssrc=""\/portals\/0\/SiteContent\/Council\/images\/members\/(?<photo>.*?)""";
+                Regex photoRgx = new Regex(photoPattern);
+                Match photoMatch = photoRgx.Match(rawHtml);
+                string photo = photoMatch.Groups["photo"].Value;
+                atLargeMember.PhotoURL = "http://www.nashville.gov/portals/0/SiteContent/Council/images/members/" + photo;
+
                 string namePattern = @">(?<name>[A-Za-z0-9\.\'\-\s]*)<\/h2>";
                 Regex nameRgx = new Regex(namePattern);
                 Match nameMatch = nameRgx.Match(rawHtml);
@@ -141,6 +153,12 @@ namespace Council_Tracker.DAL
                 Match nameMatch = nameRgx.Match(rawHtml);
                 string name = nameMatch.Groups["name"].Value;
                 districtMember.Name = name;
+
+                string photoPattern = @"<img\ssrc=""\/portals\/0\/SiteContent\/Council\/images\/members\/(?<photo>.*?)""";
+                Regex photoRgx = new Regex(photoPattern);
+                Match photoMatch = photoRgx.Match(rawHtml);
+                string photo = photoMatch.Groups["photo"].Value;
+                districtMember.PhotoURL = "http://www.nashville.gov/portals/0/SiteContent/Council/images/members/" + photo;
 
                 string address = "One Public Square, Suite 204 P.O.Box 196300 Nashville, Tennessee 37219-6300";
                 districtMember.Address = address;

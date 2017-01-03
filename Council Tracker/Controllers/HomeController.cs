@@ -11,6 +11,16 @@ namespace Council_Tracker.Controllers
     {
         public ActionResult Index()
         {
+            CouncilMemberData data = new CouncilMemberData(); // Using this to test data from the seeding councilmember with a breakpoint at line 18
+            var ViceMayor = data.seedViceMayor();
+            var AtLarges = data.seedAtLargeMembers();
+            var districtMembers = data.seedDistrictedMembers();
+            //OrdinanceData bills = new OrdinanceData();
+            //ResolutionData resols = new ResolutionData();
+            //bills.highestOrdNumCollector();
+            //resols.highestResNumCollector();
+            //var ords = bills.ordinanceScraper();
+            //var blah = resols.resolutionScraper();
             return View();
         }
 
