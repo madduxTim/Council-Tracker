@@ -11,29 +11,63 @@ namespace Council_Tracker.DAL
 
     public class OrdinanceData
     {
+        public int numberOf2015Ords = 0;
         public int numberOf2016Ords = 0;
+        public int numberOf2017Ords = 0;
+        public int highest2015OrdNumber = 0;
+        public int highest2016OrdNumber = 0;
+        public int highest2017OrdNumber = 0;
         public void highestOrdNumCollector()
         {
             WebClient client = new WebClient();
             string indexHTML = client.DownloadString($"http://www.nashville.gov/Metro-Clerk/Legislative/Ordinances/2015-2019.aspx");
-            string ordNumberPattern = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/ordinances\/term_2015_2019\/bl2016_(?<num>.*?)\.htm"">";
-            Regex ordNumberRgx = new Regex(ordNumberPattern);
-            MatchCollection ordNumberMatch = ordNumberRgx.Matches(indexHTML);
-            string ordNumber = ordNumberMatch[0].Groups["num"].Value; 
-            int highest = Convert.ToInt32(ordNumber);  // this is the number of all the ordinances on the page above
-            numberOf2016Ords = highest - 98; // 98 Reflects the number of Ords from the previous year (i.e. BL2016_99 is the first ordinance of 2016)
+            string ordNumberPattern2015 = @"www.nashville.gov\/mc\/ordinances\/term_2015_2019\/bl[0-9]{4}_[0-9]*.htm"">ORDINANCE\sBL2015-(?<num15>[0-9]*)<\/a>";
+            string ordNumberPattern2016 = @"www.nashville.gov\/mc\/ordinances\/term_2015_2019\/bl[0-9]{4}_[0-9]*.htm"">ORDINANCE\sBL2016-(?<num16>[0-9]*)<\/a>";
+            string ordNumberPattern2017 = @"www.nashville.gov\/mc\/ordinances\/term_2015_2019\/bl[0-9]{4}_[0-9]*.htm"">ORDINANCE\sBL2017-(?<num17>[0-9]*)<\/a>";
+            Regex ordNumberRgx15 = new Regex(ordNumberPattern2015);
+            Regex ordNumberRgx16 = new Regex(ordNumberPattern2016);
+            Regex ordNumberRgx17 = new Regex(ordNumberPattern2017);
+            MatchCollection ordNumberMatch15 = ordNumberRgx15.Matches(indexHTML);
+            MatchCollection ordNumberMatch16 = ordNumberRgx16.Matches(indexHTML);
+            MatchCollection ordNumberMatch17 = ordNumberRgx17.Matches(indexHTML);
+            string ordNumber15 = ordNumberMatch15[0].Groups["num15"].Value;
+            string ordNumber16 = ordNumberMatch16[0].Groups["num16"].Value;
+            string ordNumber17 = ordNumberMatch17[0].Groups["num17"].Value;
+            highest2015OrdNumber = Convert.ToInt32(ordNumber15);
+            highest2016OrdNumber = Convert.ToInt32(ordNumber16);
+            highest2017OrdNumber = Convert.ToInt32(ordNumber17);
+            numberOf2015Ords = highest2015OrdNumber;
+            numberOf2016Ords = highest2016OrdNumber - highest2015OrdNumber;
+            numberOf2017Ords = highest2017OrdNumber - highest2016OrdNumber;
         }
         public Ordinance[] ordinanceScraper()
         {
+            //int allYears = numberOf2015Ords + numberOf2016Ords + numberOf2017Ords;
             WebClient client = new WebClient();
             highestOrdNumCollector();
-            Ordinance[] scrapedOrds = new Ordinance[numberOf2016Ords];
-            for (var i = 99; i < numberOf2016Ords + 99; i++) 
+            Ordinance[] scrapedOrds = new Ordinance[numberOf2017Ords];
+            //for (var i = 1; i < numberOf2015Ords+1; i++) 
+            //{
+            //    Ordinance ordinance = new Ordinance();
+            //    ordinance.OrdNumber = i;
+            //    ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2015_{i}.htm");
+            //    scrapedOrds[i-1] = ordinance;
+            //}
+            ////return scrapedOrds;
+            //for (var j = numberOf2015Ords; j < numberOf2016Ords+1; j++)
+            //{
+            //    Ordinance ordinance = new Ordinance();
+            //    ordinance.OrdNumber = j;
+            //    ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{j}.htm");
+            //    scrapedOrds[j-1] = ordinance;
+            //}
+            //return scrapedOrds;
+            for (var k = 541; k < highest2017OrdNumber+1; k++)
             {
                 Ordinance ordinance = new Ordinance();
-                ordinance.OrdNumber = i;
-                ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{i}.htm");
-                scrapedOrds[i - 99] = ordinance;
+                ordinance.OrdNumber = k;
+                ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{k}.htm"); // THEY HAVEN'T CHANGED THE URL TO bl2017 YET!
+                scrapedOrds[k-541] = ordinance;
             }
             return scrapedOrds;
         }

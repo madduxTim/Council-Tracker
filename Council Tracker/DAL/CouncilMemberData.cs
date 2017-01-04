@@ -25,7 +25,7 @@ namespace Council_Tracker.DAL
             string office = officeMatch.Groups["office"].Value;
             viceMayor.Office = office;
 
-            string photoPattern = @"images\/members\/(?<photo>.*?)"">";
+            string photoPattern = @"members\/(?<photo>.*?)""";
             Regex photoRgx = new Regex(photoPattern);
             Match photoMatch = photoRgx.Match(rawHtml);
             string photo = photoMatch.Groups["photo"].Value;
