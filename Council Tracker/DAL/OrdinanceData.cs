@@ -42,33 +42,59 @@ namespace Council_Tracker.DAL
         }
         public Ordinance[] ordinanceScraper()
         {
-            //int allYears = numberOf2015Ords + numberOf2016Ords + numberOf2017Ords;
+            int allYears = numberOf2015Ords + numberOf2016Ords + numberOf2017Ords;
             WebClient client = new WebClient();
             highestOrdNumCollector();
             Ordinance[] scrapedOrds = new Ordinance[numberOf2017Ords];
-            //for (var i = 1; i < numberOf2015Ords+1; i++) 
+            for (var k = 541; k < highest2017OrdNumber+1; k++) // 541 IS FIRST 2017 NUMBER
+            {
+                Ordinance ordinance = new Ordinance();
+                string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{k}.htm"); // REMINDER: THEY HAVEN'T CHANGED THE URL TO bl2017 YET!
+
+                ordinance.OrdNumber = k;
+
+                ordinance.Year = 2017; 
+
+                string captionPattern = @"<\/font><\/b>(?<caption>An ordinance.*?)<\/p>";
+                Regex captionRgx = new Regex(captionPattern);
+                Match captionMatch = captionRgx.Match(rawHtml);
+                string caption = captionMatch.Groups["caption"].Value;
+                ordinance.Caption = caption;
+
+                string bodyTextPattern = @"<p class=""ordinancecontent"">(?<body>.)*<\/p>";
+                Regex bodyTextRgx = new Regex(bodyTextPattern);
+                MatchCollection bodyTextMatch = bodyTextRgx.Matches(rawHtml);
+                string bodyText = "";
+                for (var j = 0; j < bodyTextMatch.Count; j++)
+                {
+                    string match = bodyTextMatch[j].ToString();
+                    bodyText += match;
+                }
+                ordinance.Body = bodyText;
+
+                //string sponsorPattern = @"Sponsored by: (?<sponsor>.*?)<\/p>";
+                //Regex sponsorRgx = new Regex(sponsorPattern);
+                //MatchCollection sponsorMatch = sponsorRgx.Matches(rawHtml);
+                //string sponsorString = sponsorMatch[0].ToString();
+                //SQL matching with council member. Send to list. 
+                //ordinance.Sponsor = blah. 
+
+                scrapedOrds[k - 541] = ordinance;
+            }
+            //for (var j = 99; j < highest2016OrdNumber+1; j++) // 99 IS FIRST 2016 NUMBER
+            //{
+            //    Ordinance ordinance = new Ordinance();
+            //    ordinance.OrdNumber = j;
+            //    ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{j}.htm");
+            //    scrapedOrds[j - 99] = ordinance;
+            //}
+            //for (var i = 1; i < highest2015OrdNumber+1; i++)
             //{
             //    Ordinance ordinance = new Ordinance();
             //    ordinance.OrdNumber = i;
             //    ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2015_{i}.htm");
             //    scrapedOrds[i-1] = ordinance;
             //}
-            ////return scrapedOrds;
-            //for (var j = numberOf2015Ords; j < numberOf2016Ords+1; j++)
-            //{
-            //    Ordinance ordinance = new Ordinance();
-            //    ordinance.OrdNumber = j;
-            //    ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{j}.htm");
-            //    scrapedOrds[j-1] = ordinance;
-            //}
-            //return scrapedOrds;
-            for (var k = 541; k < highest2017OrdNumber+1; k++)
-            {
-                Ordinance ordinance = new Ordinance();
-                ordinance.OrdNumber = k;
-                ordinance.Body = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{k}.htm"); // THEY HAVEN'T CHANGED THE URL TO bl2017 YET!
-                scrapedOrds[k-541] = ordinance;
-            }
             return scrapedOrds;
         }
         //public void billscrapeCleaner()
