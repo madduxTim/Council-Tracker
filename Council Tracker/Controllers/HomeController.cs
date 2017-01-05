@@ -11,19 +11,19 @@ namespace Council_Tracker.Controllers
     {
         public ActionResult Index()
         {
-            CouncilMemberData data = new CouncilMemberData(); // Using this to test data from the seeding councilmember with a breakpoint at line 18
-            var ViceMayor = data.seedViceMayor();
-            var AtLarges = data.seedAtLargeMembers();
-            var districtMembers = data.seedDistrictedMembers();
-            //ResolutionData resols = new ResolutionData();
-            //resols.highestResNumCollector();
-            //var blah = resols.resolutionScraper();
-            OrdinanceData bills = new OrdinanceData();
-            bills.highestOrdNumCollector();
-            var ords = bills.ordinanceScraper();
-            int blah = bills.numberOf2016Ords;
-            int blah2 = bills.numberOf2017Ords;
-            int blah3 = bills.numberOf2015Ords;
+            //CouncilMemberData data = new CouncilMemberData(); // Using this to test data from the seeding councilmember with a breakpoint at line 18
+            //var ViceMayor = data.seedViceMayor();
+            //var AtLarges = data.seedAtLargeMembers();
+            //var districtMembers = data.seedDistrictedMembers();
+            ResolutionData resols = new ResolutionData();
+            resols.highestResNumCollector();
+            var blah = resols.resolutionScraper();
+            //OrdinanceData bills = new OrdinanceData();
+            //bills.highestOrdNumCollector();
+            //var ords = bills.ordinanceScraper();
+            //int blah = bills.numberOf2016Ords;
+            //int blah2 = bills.numberOf2017Ords;
+            //int blah3 = bills.numberOf2015Ords;
             return View();
         }
 
