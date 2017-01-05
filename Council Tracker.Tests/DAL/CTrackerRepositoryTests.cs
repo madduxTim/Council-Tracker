@@ -59,6 +59,7 @@ namespace Council_Tracker.Tests.DAL
             mock_resolutions.As<IQueryable<Resolution>>().Setup(o => o.ElementType).Returns(query_resolutions.ElementType);
             mock_resolutions.As<IQueryable<Resolution>>().Setup(o => o.GetEnumerator()).Returns(query_resolutions.GetEnumerator());
             mock_context.Setup(c => c.Resolutions).Returns(mock_resolutions.Object);
+            mock_resolutions.Setup(r => r.Add(It.IsAny<Resolution>())).Callback((Resolution res) => faux_res_list.Add(res));
 
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.Provider).Returns(query_members.Provider);
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.Expression).Returns(query_members.Expression);
@@ -132,6 +133,18 @@ namespace Council_Tracker.Tests.DAL
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CanGetSingleRes()
+        {
+            int resnumber = 300;
+            Resolution res = new Resolution { Body = "blah", ResNumber = 150 };
+            repo.ManuallyAddRes(res);
+            Resolution singleRes = repo.GetSingleRes(resnumber);
+            int expected = res.ResNumber;
+            Assert.AreEqual(expected, singleRes.ResNumber);
+        }
+
         [TestMethod]
         public void CanGetMembers()
         {

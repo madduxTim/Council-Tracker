@@ -21,9 +21,9 @@ namespace Council_Tracker.DAL
         {
             WebClient client = new WebClient();
             string indexHTML = client.DownloadString($"http://www.nashville.gov/Metro-Clerk/Legislative/Resolutions/2015-2019.aspx");
-            string resNumberPattern2015 = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs2015_(?<num15>.*?)\.htm"">";
-            string resNumberPattern2016 = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs2016_(?<num16>.*?)\.htm"">";
-            string resNumberPattern2017 = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs2017_(?<num17>.*?)\.htm"">";
+            string resNumberPattern2015 = @"www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs[0-9]{4}_[0-9]*.htm"">RESOLUTION\sRS2015-(?<num15>[0-9]*)<\/a>";
+            string resNumberPattern2016 = @"www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs[0-9]{4}_[0-9]*.htm"">RESOLUTION\sRS2016-(?<num16>[0-9]*)<\/a>";
+            string resNumberPattern2017 = @"www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs[0-9]{4}_[0-9]*.htm"">RESOLUTION\sRS2017-(?<num17>[0-9]*)<\/a>";
             Regex resNumberRgx2015 = new Regex(resNumberPattern2015);
             Regex resNumberRgx2016 = new Regex(resNumberPattern2016);
             Regex resNumberRgx2017 = new Regex(resNumberPattern2017);
@@ -50,8 +50,28 @@ namespace Council_Tracker.DAL
             for (var i = 503; i < highest2017ResNumber+1; i++) // 503 IS FIRST 20217 NUMBER
             {
                 Resolution resolution = new Resolution();
+                string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm"); // THEY HAVEN'T CHANGED THE URL TO REFLECT 2017 YET. 
+                
                 resolution.ResNumber = i;
-                resolution.Body = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm"); // THEY HAVEN'T CHANGED THE URL TO REFLECT 2017 YET. 
+                resolution.Year = 2017;
+
+                string captionPattern = @"<\/font><\/b>(?<caption>A resolution.*?)<\/p>";
+                Regex captionRgx = new Regex(captionPattern);
+                Match captionMatch = captionRgx.Match(rawHtml);
+                string caption = captionMatch.Groups["caption"].Value;
+                resolution.Caption = caption;
+
+                string bodyTextPattern = @"<p class=""LEGISLATION"">(?<body>.)*<\/p>";
+                Regex bodyTextRgx = new Regex(bodyTextPattern);
+                MatchCollection bodyTextMatch = bodyTextRgx.Matches(rawHtml);
+                string bodyText = "";
+                for (var j = 0; j < bodyTextMatch.Count; j++)
+                {
+                    string match = bodyTextMatch[j].ToString();
+                    bodyText += match;
+                }
+                resolution.Body = bodyText;
+
                 scrapedResolutions[i - 503] = resolution;
             }
             return scrapedResolutions;

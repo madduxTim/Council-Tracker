@@ -209,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResolutionController.cs" />
     <Compile Include="Controllers\OrdinanceController.cs" />
     <Compile Include="DAL\OrdinanceData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />
@@ -281,6 +282,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="NgPartials\_ordinance-template.html" />
+    <Content Include="NgPartials\_resolution-template.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
