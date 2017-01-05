@@ -61,5 +61,11 @@ namespace Council_Tracker.DAL
             Resolution res = Context.Resolutions.FirstOrDefault(r => r.ResNumber == resnumber);
             return res;
         }
+
+        public CouncilMember GetSingleMember(int id)
+        {
+            CouncilMember member = Context.Council_Members.FirstOrDefault(c => c.ID == id);
+            return member;
+        }
     }
 }

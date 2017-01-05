@@ -11,7 +11,7 @@
             .error(function (error) {
                 console.log(error);
             });
-        };
+        }
         return $scope.ords;
     };
 

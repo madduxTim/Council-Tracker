@@ -66,6 +66,7 @@ namespace Council_Tracker.Tests.DAL
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.ElementType).Returns(query_members.ElementType);
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.GetEnumerator()).Returns(query_members.GetEnumerator());
             mock_context.Setup(c => c.Council_Members).Returns(mock_members.Object);
+            mock_members.Setup(m => m.Add(It.IsAny<CouncilMember>())).Callback((CouncilMember cm) => faux_member_list.Add(cm));
         }
 
         [TestMethod]
@@ -156,6 +157,17 @@ namespace Council_Tracker.Tests.DAL
             int actual = repo.GetMembers().Count();
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void CanGetSingleMemberByID()
+        {
+            int id = 100;
+            CouncilMember dude = new CouncilMember { Name = "Bill", ID = 100, Office = "At Large" };
+            repo.ManuallyAddMember(dude);
+            CouncilMember singleMem = repo.GetSingleMember(id);
+            int expected = dude.ID;
+            Assert.AreEqual(expected, singleMem.ID);
         }
     }
 }
