@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace Council_Tracker.Models
 {
@@ -16,6 +17,8 @@ namespace Council_Tracker.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual ICollection<Ordinance> Ordinances { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

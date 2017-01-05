@@ -3,7 +3,7 @@
 <div class="col-lg-12" data-ng-init="getOrd(bill_number)">
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h5>Ordinance {{ord.OrdNumber}} -- <!--{{ord.Year}}--> || Sponsor: <!--{{ord.Sponsor}}--></h5>
+            <h5>Ordinance {{ord.OrdNumber}} -- {{ord.Year}} || Sponsor: <!--{{ord.Sponsor}}--></h5>
             <button type="button" class="btn btn-default" aria-label="Right Align">
                 <span class="glyphicon glyphicon-ok"></span> Follow
             </button>
@@ -11,11 +11,11 @@
         <div class="panel-body">
             <div>
                 <h5>Caption: </h5> 
-                <!--{{ord.Caption}}--> 
+                {{ord.Caption}} 
             </div>
             <div>
                 <h5>Main Text: </h5> 
-                <!--{{ord.Body}}--> 
+                <p ng-bind-html="ord.Body"></p> 
             </div>
             <div>
                <h5>Enactment Date: </h5>

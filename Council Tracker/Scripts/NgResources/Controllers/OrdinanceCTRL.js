@@ -1,4 +1,4 @@
-﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams) {
+﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce) {
     $scope.ords = [];
     $scope.running = false;
     $scope.getOrds = () => {
@@ -22,6 +22,7 @@
         $http.get("/api/Ordinance/" + number)
             .success(function (response) {
                 $scope.ord = response;
+                $scope.ord.Body = $sce.trustAsHtml($scope.ord.Body);
             })
             .error(function (error) {
                 console.log(error);

@@ -20,5 +20,6 @@ namespace Council_Tracker.Models
         public virtual Dictionary<string, DateTime> History { get; set; }
         public DateTime? EnactmentDate { get; set; }
         public string ExhibitURL { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }
