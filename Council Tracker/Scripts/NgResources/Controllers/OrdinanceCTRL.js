@@ -1,4 +1,17 @@
-﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce) {
+﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce, $location) {
+
+    $scope.follow = () => {
+        //if (user is !logged in) {
+        alert("You need to signed in to do that! Please Register or Log.");
+    //} else { api post } 
+    }
+
+    $scope.signIn = () => {
+        console.log("blah");
+        $("#loginLink").append("<div id='signInID' >hello!</div>");
+        $("#signInID").hide();
+    }
+
     $scope.ords = [];
     $scope.running = false;
     $scope.getOrds = () => {

@@ -16,13 +16,12 @@
     };
 
     $scope.member = [];
-    $scope.getMember = (id) => {
+    $scope.getMember = (member_id) => {
         var url = window.location.href.split("/");
         var id = url[url.length - 1];
         $http.get("/api/Member/" + id)
             .success(function (response) {
                 $scope.member = response;
-                console.log(response);
             })
             .error(function (error) {
                 console.log(error);
