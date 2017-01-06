@@ -3,14 +3,27 @@
     $scope.follow = () => {
         //if (user is !logged in) {
         alert("You need to signed in to do that! Please Register or Log.");
-    //} else { api post } 
-    }
+        
+        //} else { 
+        // api post for the bill id and the user id using 
+        console.log($("#signInID").val()); // user id 
+        console.log($scope.ord.OrdNumber); // bill id
+        // } 
+    };
 
+    
     $scope.signIn = () => {
-        console.log("blah");
-        $("#loginLink").append("<div id='signInID' >hello!</div>");
-        $("#signInID").hide();
-    }
+        var ID = null;
+        $http.get("/api/User")
+        .success(function (response) {
+            ID = response;
+            $("#loginLink").append(`<input type='text' id='signInID' value='${ID}'/>`);
+            $("#signInID").hide();
+        })
+        .error(function (error) {
+            console.log(error);
+        });
+    };
 
     $scope.ords = [];
     $scope.running = false;
