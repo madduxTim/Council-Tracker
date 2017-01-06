@@ -24,14 +24,26 @@ namespace Council_Tracker.Controllers
 
         public dynamic Post([FromBody]dynamic bill)
         {
+            ApplicationUser loggedInUser = userManager.FindById(User.Identity.GetUserId());
             if (ModelState.IsValid && User.Identity.IsAuthenticated)
             {
-
-            } else
-            {
-                return "that didn't work dude, sorry.";
+                // replacing the hash with bill.UserID?? DO I EVEN NEED THIS? 
+                //if (loggedInUser.Id == "0677d5ba-83b0-4aea-8f8a-a6d97199cba2" && bill.type == "Ordinance") 
+                if (bill.type == "Ordinance")
+                {
+                    loggedInUser.Ordinances.Add(bill.ordNumber);
+                }
+                //else if (loggedInUser.Id == "0677d5ba-83b0-4aea-8f8a-a6d97199cba2" && bill.type == "Resolution")
+                else if (bill.type == "Resolution")
+                {
+                    loggedInUser.Resolutions.Add(bill.resNumber);
+                }
+                return "Posted. Nice work.";
             }
-            return "nice work";
+            else
+            {
+                return "Error! Bummer dude.";
+            }
         }
     }
 }
