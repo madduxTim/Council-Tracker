@@ -209,7 +209,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\ResolutionController.cs" />
     <Compile Include="Controllers\OrdinanceController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\OrdinanceData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />
     <Compile Include="DAL\CTrackerContext.cs" />
@@ -218,25 +221,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612051523188_Initial.cs" />
-    <Compile Include="Migrations\201612051523188_Initial.Designer.cs">
-      <DependentUpon>201612051523188_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612080027305_OrdAndResTables.cs" />
-    <Compile Include="Migrations\201612080027305_OrdAndResTables.Designer.cs">
-      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.cs" />
-    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.Designer.cs">
-      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612130313525_RefactSeedMethod.cs" />
-    <Compile Include="Migrations\201612130313525_RefactSeedMethod.Designer.cs">
-      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.cs" />
-    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.Designer.cs">
-      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
+    <Compile Include="Migrations\201701070155471_InitialCreate.cs" />
+    <Compile Include="Migrations\201701070155471_InitialCreate.Designer.cs">
+      <DependentUpon>201701070155471_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -268,7 +255,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="NgPartials\_council-member-template.html" />
     <Content Include="NgPartials\_ordinance-template.html" />
+    <Content Include="NgPartials\_resolution-template.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -335,7 +324,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="NgPartials\_ordinance.html" />
     <Content Include="NgPartials\_resolution.html" />
-    <Content Include="NgPartials\_council-member.html" />
+    <Content Include="NgPartials\_council-members.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -347,20 +336,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612051523188_Initial.resx">
-      <DependentUpon>201612051523188_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612080027305_OrdAndResTables.resx">
-      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612122004234_RefactoredForXMLReader.resx">
-      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612130313525_RefactSeedMethod.resx">
-      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612150141320_NullableDateTimeModels.resx">
-      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701070155471_InitialCreate.resx">
+      <DependentUpon>201701070155471_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

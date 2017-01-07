@@ -55,5 +55,25 @@ namespace Council_Tracker.DAL
             Ordinance ord = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordnumber);
             return ord;
         }
+
+        public Resolution GetSingleRes(int resnumber)
+        {
+            Resolution res = Context.Resolutions.FirstOrDefault(r => r.ResNumber == resnumber);
+            return res;
+        }
+
+        public CouncilMember GetSingleMember(int id)
+        {
+            CouncilMember member = Context.Council_Members.FirstOrDefault(c => c.ID == id);
+            return member;
+        }
+
+        public void TrackOrdinance(int ordNumber, string userID)
+        {
+            var ordinance = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordNumber);
+            var user = Context.Users.FirstOrDefault(u => u.Id == userID);
+            ordinance.Users.Add(user);
+            Context.SaveChanges();
+        }
     }
 }

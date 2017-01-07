@@ -17,6 +17,7 @@ namespace Council_Tracker.Models
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string PhotoURL { get; set; }
         public List<string> Occupation { get; set; }
         public List<string> Family { get; set; }
         public List<string> Education { get; set; }

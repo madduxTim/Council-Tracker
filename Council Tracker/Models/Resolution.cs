@@ -10,9 +10,8 @@ namespace Council_Tracker.Models
     {
         [Key]
         public int ID { get; set; }
-        [Required]
+        public int Year { get; set; }
         public int ResNumber { get; set; }
-        [Required]
         public string Body { get; set; }
         public string Caption { get; set; }
         public List<CouncilMember> Sponsor { get; set; }
@@ -21,5 +20,6 @@ namespace Council_Tracker.Models
         public Dictionary<string, DateTime> History { get; set; }
         public DateTime? EnactmentDate { get; set; }
         public string ExhibitURL { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

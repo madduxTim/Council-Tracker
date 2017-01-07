@@ -6,27 +6,36 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Microsoft.AspNet.Identity.Owin;
-using System.Web;
 
 namespace Council_Tracker.Controllers
 {
-    public class OrdinanceController : ApiController
+    public class MemberController : ApiController
     {
         CTrackerRepository repo = new CTrackerRepository();
         // GET api/<controller>
-        public List<Ordinance> Get()
+        public List<CouncilMember> Get()
         {
-            return repo.GetOrds();
+            return repo.GetMembers();
         }
 
-        public Ordinance Get(int id)
+        public CouncilMember Get(int id)
         {
-            return repo.GetSingleOrd(id);
+            return repo.GetSingleMember(id);
         }
+
+        // GET api/<controller>/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
         // POST api/<controller>
         //public void Post([FromBody]string value)
+        //{
+        //}
+
+        //// PUT api/<controller>/5
+        //public void Put(int id, [FromBody]string value)
         //{
         //}
 

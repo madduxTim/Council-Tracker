@@ -11,30 +11,68 @@ namespace Council_Tracker.DAL
 
     public class ResolutionData
     {
-        public int latestResolutionNumber = 0;
+        public int numberOf2015Res = 0;
+        public int numberOf2016Res = 0;
+        public int numberOf2017Res = 0;
+        public int highest2015ResNumber = 0;
+        public int highest2016ResNumber = 0;
+        public int highest2017ResNumber = 0;
         public void highestResNumCollector()
         {
             WebClient client = new WebClient();
             string indexHTML = client.DownloadString($"http://www.nashville.gov/Metro-Clerk/Legislative/Resolutions/2015-2019.aspx");
-            string resNumberPattern = @"<a href=""http:\/\/www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs2016_(?<num>.*?)\.htm"">";
-            Regex resNumberRgx = new Regex(resNumberPattern);
-            MatchCollection resNumberMatch = resNumberRgx.Matches(indexHTML);
-            string resNumber = resNumberMatch[0].Groups["num"].Value;
-            int highest = Convert.ToInt32(resNumber);
-            latestResolutionNumber = highest - 76; // 76 Reflects the number of Ords from the previous year
+            string resNumberPattern2015 = @"www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs[0-9]{4}_[0-9]*.htm"">RESOLUTION\sRS2015-(?<num15>[0-9]*)<\/a>";
+            string resNumberPattern2016 = @"www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs[0-9]{4}_[0-9]*.htm"">RESOLUTION\sRS2016-(?<num16>[0-9]*)<\/a>";
+            string resNumberPattern2017 = @"www\.nashville\.gov\/mc\/resolutions\/term_2015_2019\/rs[0-9]{4}_[0-9]*.htm"">RESOLUTION\sRS2017-(?<num17>[0-9]*)<\/a>";
+            Regex resNumberRgx2015 = new Regex(resNumberPattern2015);
+            Regex resNumberRgx2016 = new Regex(resNumberPattern2016);
+            Regex resNumberRgx2017 = new Regex(resNumberPattern2017);
+            MatchCollection resNumberMatch2015 = resNumberRgx2015.Matches(indexHTML);
+            MatchCollection resNumberMatch2016 = resNumberRgx2016.Matches(indexHTML);
+            MatchCollection resNumberMatch2017 = resNumberRgx2017.Matches(indexHTML);
+            string resNumber2015 = resNumberMatch2015[0].Groups["num15"].Value;
+            string resNumber2016 = resNumberMatch2016[0].Groups["num16"].Value;
+            string resNumber2017 = resNumberMatch2017[0].Groups["num17"].Value;
+            highest2015ResNumber = Convert.ToInt32(resNumber2015);
+            highest2016ResNumber = Convert.ToInt32(resNumber2016);
+            highest2017ResNumber = Convert.ToInt32(resNumber2017);
+            numberOf2015Res = highest2015ResNumber;
+            numberOf2016Res = highest2016ResNumber - highest2015ResNumber;
+            numberOf2017Res = highest2017ResNumber - highest2016ResNumber;
         }
 
         public Resolution[] resolutionScraper()
         {
+            int allYears = numberOf2015Res + numberOf2016Res + numberOf2017Res;
             WebClient client = new WebClient();
             highestResNumCollector();
-            Resolution[] scrapedResolutions = new Resolution[latestResolutionNumber];
-            for (var i = 77; i < latestResolutionNumber+77; i++)
+            Resolution[] scrapedResolutions = new Resolution[numberOf2017Res];
+            for (var i = 503; i < highest2017ResNumber+1; i++) // 503 IS FIRST 20217 NUMBER
             {
                 Resolution resolution = new Resolution();
+                string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm"); // THEY HAVEN'T CHANGED THE URL TO REFLECT 2017 YET. 
+                
                 resolution.ResNumber = i;
-                resolution.Body = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm");
-                scrapedResolutions[i - 77] = resolution;
+                resolution.Year = 2017;
+
+                string captionPattern = @"<\/font><\/b>(?<caption>A resolution.*?)<\/p>";
+                Regex captionRgx = new Regex(captionPattern);
+                Match captionMatch = captionRgx.Match(rawHtml);
+                string caption = captionMatch.Groups["caption"].Value;
+                resolution.Caption = caption;
+
+                string bodyTextPattern = @"<p class=""LEGISLATION"">(?<body>.)*<\/p>";
+                Regex bodyTextRgx = new Regex(bodyTextPattern);
+                MatchCollection bodyTextMatch = bodyTextRgx.Matches(rawHtml);
+                string bodyText = "";
+                for (var j = 0; j < bodyTextMatch.Count; j++)
+                {
+                    string match = bodyTextMatch[j].ToString();
+                    bodyText += match;
+                }
+                resolution.Body = bodyText;
+
+                scrapedResolutions[i - 503] = resolution;
             }
             return scrapedResolutions;
         }
@@ -52,8 +90,8 @@ namespace Council_Tracker.DAL
 //{
 //    WebClient client = new WebClient();
 //    highestResNumCollector();
-//    Resolution[] scrapedResolutions = new Resolution[latestResolutionNumber];
-//    for (var i = 77; i < latestResolutionNumber + 1; i++)
+//    Resolution[] scrapedResolutions = new Resolution[highest2017ResNumber];
+//    for (var i = 77; i < highest2017ResNumber + 1; i++)
 //    {
 //        Resolution resolution = new Resolution();
 //        string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm");

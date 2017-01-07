@@ -7,13 +7,13 @@ namespace Council_Tracker.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class RegexRound2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RegexRound2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612051523188_Initial"; }
+            get { return "201701041848043_RegexRound2"; }
         }
         
         string IMigrationMetadata.Source

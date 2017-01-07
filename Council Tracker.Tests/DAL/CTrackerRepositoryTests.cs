@@ -59,12 +59,14 @@ namespace Council_Tracker.Tests.DAL
             mock_resolutions.As<IQueryable<Resolution>>().Setup(o => o.ElementType).Returns(query_resolutions.ElementType);
             mock_resolutions.As<IQueryable<Resolution>>().Setup(o => o.GetEnumerator()).Returns(query_resolutions.GetEnumerator());
             mock_context.Setup(c => c.Resolutions).Returns(mock_resolutions.Object);
+            mock_resolutions.Setup(r => r.Add(It.IsAny<Resolution>())).Callback((Resolution res) => faux_res_list.Add(res));
 
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.Provider).Returns(query_members.Provider);
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.Expression).Returns(query_members.Expression);
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.ElementType).Returns(query_members.ElementType);
             mock_members.As<IQueryable<CouncilMember>>().Setup(o => o.GetEnumerator()).Returns(query_members.GetEnumerator());
             mock_context.Setup(c => c.Council_Members).Returns(mock_members.Object);
+            mock_members.Setup(m => m.Add(It.IsAny<CouncilMember>())).Callback((CouncilMember cm) => faux_member_list.Add(cm));
         }
 
         [TestMethod]
@@ -132,6 +134,18 @@ namespace Council_Tracker.Tests.DAL
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void CanGetSingleRes()
+        {
+            int resnumber = 300;
+            Resolution res = new Resolution { Body = "blah", ResNumber = 150 };
+            repo.ManuallyAddRes(res);
+            Resolution singleRes = repo.GetSingleRes(resnumber);
+            int expected = res.ResNumber;
+            Assert.AreEqual(expected, singleRes.ResNumber);
+        }
+
         [TestMethod]
         public void CanGetMembers()
         {
@@ -143,6 +157,17 @@ namespace Council_Tracker.Tests.DAL
             int actual = repo.GetMembers().Count();
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void CanGetSingleMemberByID()
+        {
+            int id = 100;
+            CouncilMember dude = new CouncilMember { Name = "Bill", ID = 100, Office = "At Large" };
+            repo.ManuallyAddMember(dude);
+            CouncilMember singleMem = repo.GetSingleMember(id);
+            int expected = dude.ID;
+            Assert.AreEqual(expected, singleMem.ID);
         }
     }
 }
