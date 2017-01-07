@@ -221,49 +221,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612051523188_Initial.cs" />
-    <Compile Include="Migrations\201612051523188_Initial.Designer.cs">
-      <DependentUpon>201612051523188_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612080027305_OrdAndResTables.cs" />
-    <Compile Include="Migrations\201612080027305_OrdAndResTables.Designer.cs">
-      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.cs" />
-    <Compile Include="Migrations\201612122004234_RefactoredForXMLReader.Designer.cs">
-      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612130313525_RefactSeedMethod.cs" />
-    <Compile Include="Migrations\201612130313525_RefactSeedMethod.Designer.cs">
-      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.cs" />
-    <Compile Include="Migrations\201612150141320_NullableDateTimeModels.Designer.cs">
-      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701032047084_Year&amp;PhotoURL.cs" />
-    <Compile Include="Migrations\201701032047084_Year&amp;PhotoURL.Designer.cs">
-      <DependentUpon>201701032047084_Year&amp;PhotoURL.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701050112171_Test1.4.17.cs" />
-    <Compile Include="Migrations\201701050112171_Test1.4.17.Designer.cs">
-      <DependentUpon>201701050112171_Test1.4.17.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701050201147_TrackingInitial.cs" />
-    <Compile Include="Migrations\201701050201147_TrackingInitial.Designer.cs">
-      <DependentUpon>201701050201147_TrackingInitial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701061725091_ResolutionsTracking.cs" />
-    <Compile Include="Migrations\201701061725091_ResolutionsTracking.Designer.cs">
-      <DependentUpon>201701061725091_ResolutionsTracking.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701061728199_ResolutionUser.cs" />
-    <Compile Include="Migrations\201701061728199_ResolutionUser.Designer.cs">
-      <DependentUpon>201701061728199_ResolutionUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701061936195_UserID.cs" />
-    <Compile Include="Migrations\201701061936195_UserID.Designer.cs">
-      <DependentUpon>201701061936195_UserID.cs</DependentUpon>
+    <Compile Include="Migrations\201701070043036_InitialCreate.cs" />
+    <Compile Include="Migrations\201701070043036_InitialCreate.Designer.cs">
+      <DependentUpon>201701070043036_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -376,38 +336,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612051523188_Initial.resx">
-      <DependentUpon>201612051523188_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612080027305_OrdAndResTables.resx">
-      <DependentUpon>201612080027305_OrdAndResTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612122004234_RefactoredForXMLReader.resx">
-      <DependentUpon>201612122004234_RefactoredForXMLReader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612130313525_RefactSeedMethod.resx">
-      <DependentUpon>201612130313525_RefactSeedMethod.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612150141320_NullableDateTimeModels.resx">
-      <DependentUpon>201612150141320_NullableDateTimeModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701032047084_Year&amp;PhotoURL.resx">
-      <DependentUpon>201701032047084_Year&amp;PhotoURL.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701050112171_Test1.4.17.resx">
-      <DependentUpon>201701050112171_Test1.4.17.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701050201147_TrackingInitial.resx">
-      <DependentUpon>201701050201147_TrackingInitial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701061725091_ResolutionsTracking.resx">
-      <DependentUpon>201701061725091_ResolutionsTracking.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701061728199_ResolutionUser.resx">
-      <DependentUpon>201701061728199_ResolutionUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701061936195_UserID.resx">
-      <DependentUpon>201701061936195_UserID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701070043036_InitialCreate.resx">
+      <DependentUpon>201701070043036_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

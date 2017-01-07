@@ -1,8 +1,8 @@
-﻿<div class="col-lg-12" data-ng-init="getOrd(bill_number); signIn()">
+﻿<div class="col-lg-12" data-ng-init="getOrd(bill_number)">
     <div class="panel panel-success">
         <div class="panel-heading">
             <h5>Ordinance {{ord.OrdNumber}} -- {{ord.Year}} || Sponsor: <!--{{ord.Sponsor}}--></h5>
-            <button type="button" class="btn btn-default" ng-click="follow()">
+            <button type="button" class="btn btn-default" ng-click="follow(ord.OrdNumber)">
                 <span class="glyphicon glyphicon-ok"></span> Follow
             </button>
         </div>

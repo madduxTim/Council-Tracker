@@ -1,27 +1,8 @@
 ﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce, $location) {
 
-    $scope.billObject = {
-        type: "",
-        ordNumber: "",
-        userID: "",
+    $scope.follow = (ordNumber) => {
+        $http.post("/api/User/Ordinance/" + ordNumber);
     };
-
-    $scope.follow = () => {
-        $scope.billObject.type = "Ordinance";
-        $scope.billObject.ordNumber = $scope.ord.OrdNumber;
-        $scope.billObject.userID = $("#signInID").val();
-        //console.log($scope.billObject);
-        $http.post("/api/User", $scope.billObject);
-        //if (user is !logged in) { NEED THIS???? 
-        //alert("You need to signed in to do that! Please Register or Log.");
-        
-        //} else { 
-        // api post for the bill id and the user id using 
-        //console.log($("#signInID").val()); // user id 
-        //console.log($scope.ord.OrdNumber); // bill id
-        // } 
-    };
-
     
     $scope.signIn = () => {
         var ID = null;

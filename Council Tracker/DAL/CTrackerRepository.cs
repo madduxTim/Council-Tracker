@@ -67,5 +67,13 @@ namespace Council_Tracker.DAL
             CouncilMember member = Context.Council_Members.FirstOrDefault(c => c.ID == id);
             return member;
         }
+
+        public void TrackOrdinance(int ordNumber, string userID)
+        {
+            var ordinance = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordNumber);
+            var user = Context.Users.FirstOrDefault(u => u.Id == userID);
+            user.Ordinances.Add(ordinance);
+            Context.SaveChanges();
+        }
     }
 }
