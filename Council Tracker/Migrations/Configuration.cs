@@ -20,7 +20,7 @@ namespace Council_Tracker.Migrations
             OrdinanceData ordData = new OrdinanceData();
             ResolutionData resData = new ResolutionData();
             Ordinance ordinance = new Ordinance();
-            //ApplicationUser user = new ApplicationUser();
+            ApplicationUser user = new ApplicationUser();
             //context.Ordinances.AddOrUpdate(
             //    ord => new { ord.OrdNumber },
             //    ordData.ordinanceScraper()
@@ -31,9 +31,9 @@ namespace Council_Tracker.Migrations
             //    );
             //context.Council_Members.AddOrUpdate(
             //    cm => new { cm.Name, cm.Office },   //Reminder, this is checking that the name and office are unique
-                  //data.seedViceMayor()              // Was not allowing me to seed with muliple methods from the councilmemberdata...
-                  //data.seedAtLargeMembers()
-                //data.seedDistrictedMembers()
+            //                                        //data.seedViceMayor()              // Was not allowing me to seed with muliple methods from the councilmemberdata...
+            //                                        //data.seedAtLargeMembers()
+            //    data.seedDistrictedMembers()
                 //);
         }
     }

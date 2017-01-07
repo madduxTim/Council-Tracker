@@ -72,7 +72,7 @@ namespace Council_Tracker.DAL
         {
             var ordinance = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordNumber);
             var user = Context.Users.FirstOrDefault(u => u.Id == userID);
-            user.Ordinances.Add(ordinance);
+            ordinance.Users.Add(user);
             Context.SaveChanges();
         }
     }

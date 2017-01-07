@@ -13,7 +13,7 @@ namespace Council_Tracker.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701070043036_InitialCreate"; }
+            get { return "201701070155471_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
