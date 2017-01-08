@@ -1,4 +1,28 @@
 ﻿app.controller("ResolutionCTRL", function ($scope, $http, $routeParams, $sce) {
+
+    $scope.userID = null;
+    $scope.signIn = () => {
+        $http.get("/api/User")
+        .success(function (response) {
+            $scope.userID = response;
+        })
+        .error(function (error) {
+            console.log(error);
+        })
+    };
+
+    $scope.follow = (resNumber) => {
+        if ($scope.userID == null)
+        {
+            alert("You need to be logged in for that!");
+        }
+        else
+        {
+            $http.post("/api/User/Resolution/" + resNumber);
+            alert(`Resolution ${resNumber} has been added to your list!`);
+        }
+    };
+
     $scope.allRes = [];
     $scope.running = false;
     $scope.getAllRes = () => {

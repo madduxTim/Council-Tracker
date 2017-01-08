@@ -1,8 +1,8 @@
-﻿<div class="col-lg-12" data-ng-init="getRes(bill_number)">
+﻿<div class="col-lg-12" data-ng-init="getRes(bill_number); signIn()">
     <div class="panel panel-success">
         <div class="panel-heading">
             <h5>Resolution {{res.ResNumber}} -- {{res.Year}} || Sponsor: <!--{{res.Sponsor}}--></h5>
-            <button type="button" class="btn btn-default" aria-label="Right Align">
+            <button type="button" class="btn btn-default" ng-click="follow(res.ResNumber)">
                 <span class="glyphicon glyphicon-ok"></span> Follow
             </button>
         </div>
