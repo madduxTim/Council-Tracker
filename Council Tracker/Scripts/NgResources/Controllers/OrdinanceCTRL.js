@@ -1,23 +1,30 @@
 ﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce, $location) {
 
-    $scope.follow = (ordNumber) => {
-        $http.post("/api/User/Ordinance/" + ordNumber);
-    };
-    
+    $scope.userID = null;
     $scope.signIn = () => {
-        var ID = null;
         $http.get("/api/User")
         .success(function (response) {
-            ID = response;
-            $("#loginLink").append(`<input type='text' id='signInID' value='${ID}'/>`);
-            $("#signInID").hide();
-            console.log(response);
+            $scope.userID = response;
         })
         .error(function (error) {
             console.log(error);
         });
     };
 
+    $scope.follow = (ordNumber) => {
+        if ($scope.userID == null)
+        {
+            alert("You need to be logged in for that!");
+            //location.href("/Account/Register");    // nope. 
+            //$location.url("/Account/Register");    // nope. 
+        }
+        else
+        {
+            $http.post("/api/User/Ordinance/" + ordNumber);
+            alert("Ordinance " + ordNumber + " has been added to the list of ordinances!");
+        }
+    };
+   
     $scope.ords = [];
     $scope.running = false;
     $scope.getOrds = () => {

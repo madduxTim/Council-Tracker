@@ -20,7 +20,14 @@ namespace Council_Tracker.Controllers
         public string Get()
         {
             ApplicationUser user = userManager.FindById(User.Identity.GetUserId());
-            return user.Id;
+            if (user == null)
+            {
+                return null;
+            } 
+            else
+            {
+                return user.Id;
+            }
         }
 
         [HttpPost]
