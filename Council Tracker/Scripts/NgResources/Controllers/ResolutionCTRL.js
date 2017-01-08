@@ -1,4 +1,9 @@
 ﻿app.controller("ResolutionCTRL", function ($scope, $http, $routeParams, $sce) {
+
+    $scope.follow = (resNumber) => {
+        $http.post("/api/User/Resolution/" + resNumber);
+    };
+
     $scope.allRes = [];
     $scope.running = false;
     $scope.getAllRes = () => {

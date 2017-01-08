@@ -75,5 +75,13 @@ namespace Council_Tracker.DAL
             ordinance.Users.Add(user);
             Context.SaveChanges();
         }
+
+        public void TrackResolution(int resNumber, string userID)
+        {
+            var resolution = Context.Resolutions.FirstOrDefault(r => r.ResNumber == resNumber);
+            var user = Context.Users.FirstOrDefault(u => u.Id == userID);
+            resolution.Users.Add(user);
+            Context.SaveChanges(); 
+        }
     }
 }

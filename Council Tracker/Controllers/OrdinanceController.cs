@@ -24,15 +24,5 @@ namespace Council_Tracker.Controllers
         {
             return repo.GetSingleOrd(id);
         }
-
-        // POST api/<controller>
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// DELETE api/<controller>/5
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

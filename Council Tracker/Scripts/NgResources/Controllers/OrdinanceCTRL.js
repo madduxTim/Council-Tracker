@@ -11,6 +11,7 @@
             ID = response;
             $("#loginLink").append(`<input type='text' id='signInID' value='${ID}'/>`);
             $("#signInID").hide();
+            console.log(response);
         })
         .error(function (error) {
             console.log(error);

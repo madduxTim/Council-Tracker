@@ -23,29 +23,6 @@ namespace Council_Tracker.Controllers
             return user.Id;
         }
 
-        //[HttpPost]
-        //[Route("api/User/Resolution/{resNumber}")]
-        //public string PostRes(int resNumber)
-        //{
-        //    ApplicationUser loggedInUser = userManager.FindById(User.Identity.GetUserId());
-        //    if (ModelState.IsValid && User.Identity.IsAuthenticated)
-        //    {
-        //        // replacing the hash with bill.UserID?? DO I EVEN NEED THIS? 
-        //        if (bill.type == "Ordinance")
-        //        {
-        //            loggedInUser.Ordinances.Add(bill.ordNumber);
-        //        }
-        //        else if (bill.type == "Resolution")
-        //        {
-        //            loggedInUser.Resolutions.Add(bill.resNumber);
-        //        }
-        //        return "Posted. Nice work.";
-        //    }
-        //    else
-        //    {
-        //        return "Error! Bummer dude.";
-        //    }
-        //}
         [HttpPost]
         [Route("api/User/Ordinance/{ordNumber}")]
         public string PostOrd(int ordNumber)
@@ -62,5 +39,22 @@ namespace Council_Tracker.Controllers
                 return "Error! Bummer dude.";
             }
         }
+        [HttpPost]
+        [Route("api/User/Resolution/{resNumber}")]
+        public string PostRes(int resNumber)
+        {
+            ApplicationUser loggedInUser = userManager.FindById(User.Identity.GetUserId());
+            Resolution res = new Resolution();
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
+            {
+                repo.TrackResolution(resNumber, loggedInUser.Id);
+                return "Posted. Nice work.";
+            }
+            else
+            {
+                return "Error! Bummer dude.";
+            }
+        }
+
     }
 }
