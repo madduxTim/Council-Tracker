@@ -1,6 +1,5 @@
 ﻿var app = angular.module("CouncilTracker", ["ngRoute"]);
 
-//Route Config 
 app.config(function ($routeProvider) {
     $routeProvider.
         when("/Ordinance", {
@@ -26,6 +25,10 @@ app.config(function ($routeProvider) {
         when("/CouncilMember/:ID", {
             templateUrl: "/NgPartials/_council-member-template.html",
             controller: "CouncilMemberCTRL"
+        }).
+        when("/Tracking", {
+            templateUrl: "/NgPartials/_tracking-list.html",
+            controller: "TrackingCTRL"
         });
 });
 

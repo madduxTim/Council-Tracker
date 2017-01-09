@@ -17,14 +17,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-                @Html.ActionLink("Council Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div id="logo-div">
+                    <img ID="logo-token" src="/Content/logo.png"/>
+                    @Html.ActionLink("Council Tracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -47,5 +49,6 @@
     <script type="text/javascript" src="~/Scripts/NgResources/Controllers/ResolutionCTRL.js"></script>
     <script type="text/javascript" src="~/Scripts/NgResources/Controllers/CouncilMemberCTRL.js"></script>
     <script type="text/javascript" src="~/Scripts/NgResources/Controllers/NgNavCTRL.js"></script>
+    <script type="text/javascript" src="~/Scripts/NgResources/Controllers/TrackingCTRL.js"></script>
 </body>
 </html>

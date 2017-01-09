@@ -1,13 +1,13 @@
 ﻿<div class="col-lg-12" data-ng-init="getMember(id)">
-    <div class="panel panel-success">
+    <div class="panel panel-info">
         <div class="panel-heading">
             <h5>{{member.Name}} -- {{member.Office}}</h5>
         </div>
         <div class="panel-body">
-            {{member.Address}}
-            {{member.Phone}}
-            {{member.Email}}
-            <img src="{{member.PhotoURL}}" />
+            <img src="{{member.PhotoURL}}" style="float:right"/>
+            <p>{{member.Address}}</p>
+            <p>{{member.Phone}}</p>
+            <p>{{member.Email}}</p>
         </div>
     </div>
 </div>

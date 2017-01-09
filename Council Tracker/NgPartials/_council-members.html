@@ -1,10 +1,13 @@
 ﻿<h2>Current Council Members</h2>
 <p>See below for all current council members</p>
 <div class="col-lg-12">
-    <div class="panel panel-success" ng-repeat="member in getMembers()">
+    <div class="panel panel-info" ng-repeat="member in getMembers()">
         <div class="panel-heading"><a ng-href="#/CouncilMember/{{member.ID}}">{{member.Name}}</a></div>
         <div class="panel-body">
-            
+            <img src="{{member.PhotoURL}}" style="float:right" />
+            <p>{{member.Address}}</p>
+            <p>{{member.Phone}}</p>
+            <p>{{member.Email}}</p>
         </div>
     </div>
 </div>

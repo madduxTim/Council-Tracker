@@ -1,0 +1,16 @@
+﻿<h2>Your list of ordinances / resolutions</h2>
+<p>See below for all the bills you are currently following.</p>
+<div class="col-lg-12">
+    <div class="panel panel-info" ng-repeat="ords in getTrackedOrds()">
+        <div class="panel-heading"><a ng-href="#/Ordinance/{{ords.OrdNumber}}">Ordinance No. {{ords.OrdNumber}}</a></div>
+        <div class="panel-body">
+            <p>Caption: {{ords.Caption}}</p>
+        </div>
+    </div>
+    <div class="panel panel-info" ng-repeat="res in getTrackedRes()">
+        <div class="panel-heading"><a ng-href="#/Resolution/{{res.ResNumber}}">Resolution No. {{res.ResNumber}}</a></div>
+        <div class="panel-body">
+            <p>Caption: {{res.Caption}} </p>
+        </div>
+    </div>
+</div>
