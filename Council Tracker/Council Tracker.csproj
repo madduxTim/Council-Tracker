@@ -258,6 +258,7 @@
     <Content Include="NgPartials\_council-member-template.html" />
     <Content Include="NgPartials\_ordinance-template.html" />
     <Content Include="NgPartials\_resolution-template.html" />
+    <Content Include="NgPartials\_tracking-list.html" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -283,6 +284,7 @@
     <Content Include="Scripts\NgResources\Controllers\NgNavCTRL.js" />
     <Content Include="Scripts\NgResources\Controllers\OrdinanceCTRL.js" />
     <Content Include="Scripts\NgResources\Controllers\ResolutionCTRL.js" />
+    <Content Include="Scripts\NgResources\Controllers\TrackingCTRL.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />

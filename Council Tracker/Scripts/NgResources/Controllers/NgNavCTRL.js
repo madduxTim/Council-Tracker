@@ -8,4 +8,7 @@
     $scope.showAllMembers = () => {
         $location.url("/CouncilMember");
     };
+    $scope.showTrackList = () => {
+        $location.url("/Tracking");
+    };
 });
