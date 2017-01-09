@@ -1,10 +1,17 @@
-﻿<h2>Ordinances</h2>
-<p>See below for a list of Ordinances for 2017</p>
-<div class="col-lg-12">
-    <div class="panel panel-info" ng-repeat="ord in getOrds()">
-        <div class="panel-heading"><a ng-href="#/Ordinance/{{ord.OrdNumber}}">Ordinance No. {{ord.OrdNumber}}</a> <!--|| Sponsors:--> </div>
-        <div class="panel-body">
-            <p>Caption: {{ord.Caption}}</p>
+﻿<div class="row">
+    <div class="col-sm-6">
+        <h2>Ordinances</h2>
+        <p>See below for a list of Ordinances for 2017</p>
+    </div>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="Enter sponsors or other keywords to filter ordinances" ng-model="searchText" />
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-info" ng-repeat="ord in getOrds() | filter: searchText">
+            <div class="panel-heading"><a ng-href="#/Ordinance/{{ord.OrdNumber}}">Ordinance No. {{ord.OrdNumber}}</a> <!--|| Sponsors:--> </div>
+            <div class="panel-body">
+                <p>Caption: {{ord.Caption}}</p>
+            </div>
         </div>
     </div>
 </div>

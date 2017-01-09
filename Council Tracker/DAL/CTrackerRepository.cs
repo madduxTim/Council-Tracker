@@ -29,6 +29,11 @@ namespace Council_Tracker.DAL
             return Context.Ordinances.ToList();
         }
 
+        //public List<Ordinance> GetTrackedOrds()
+        //{
+        //    //return Context.Ordinances.FirstOrDefault(o => o.Users == )
+        //}
+
         public void ManuallyAddRes(Resolution res)
         {
             Context.Resolutions.Add(res);

@@ -1,10 +1,17 @@
-﻿<h2>Resolutions</h2>
-<p>See below for a list of Resolutions for 2017</p>
-<div class="col-lg-12">
-    <div class="panel panel-info" ng-repeat="res in getAllRes()">
-        <div class="panel-heading"><a ng-href="#/Resolution/{{res.ResNumber}}">Resolution No. {{res.ResNumber}}</a> <!--|| Sponsors:--> </div>
-        <div class="panel-body">
-            <p>Caption: {{res.Caption}} </p>
+﻿<div class="row">
+    <div class="col-sm-6">
+        <h2>Resolutions</h2>
+        <p>See below for a list of Resolutions for 2017</p>
+    </div>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="Enter sponsors or other keywords to filter resolutions" ng-model="searchText"/>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-info" ng-repeat="res in getAllRes() | filter: searchText">
+            <div class="panel-heading"><a ng-href="#/Resolution/{{res.ResNumber}}">Resolution No. {{res.ResNumber}}</a> <!--|| Sponsors:--> </div>
+            <div class="panel-body">
+                <p>Caption: {{res.Caption}} </p>
+            </div>
         </div>
     </div>
 </div>
