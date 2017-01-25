@@ -106,9 +106,8 @@ namespace Council_Tracker.Tests.DAL
             //Act
             repo.ManuallyAddOrd(ord);
             int expected = 1;
-            int actual = repo.GetOrds().Count();
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, repo.Context.Ordinances.Count());
         }
 
         [TestMethod]
@@ -130,9 +129,8 @@ namespace Council_Tracker.Tests.DAL
             //Act
             repo.ManuallyAddRes(res);
             int expected = 1;
-            int actual = repo.GetResolutions().Count();
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, repo.Context.Resolutions.Count());
         }
 
         [TestMethod]
@@ -154,9 +152,8 @@ namespace Council_Tracker.Tests.DAL
             //Act
             repo.ManuallyAddMember(mem);
             int expected = 1;
-            int actual = repo.GetMembers().Count();
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, repo.Context.Council_Members.Count());
         }
 
         [TestMethod]
