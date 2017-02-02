@@ -122,6 +122,17 @@ namespace Council_Tracker.Tests.DAL
         }
 
         [TestMethod]
+        public void CanGetSingleRes()
+        {
+            int resnumber = 300;
+            Resolution res = new Resolution { Body = "blah", ResNumber = 300 };
+            repo.ManuallyAddRes(res);
+            Resolution singleRes = repo.GetSingleRes(resnumber);
+            int expected = res.ResNumber;
+            Assert.AreEqual(expected, singleRes.ResNumber);
+        }
+
+        [TestMethod]
         public void CanGetResolutions()
         {
             //Arrange
@@ -131,17 +142,6 @@ namespace Council_Tracker.Tests.DAL
             int expected = 1;
             //Assert
             Assert.AreEqual(expected, repo.Context.Resolutions.Count());
-        }
-
-        [TestMethod]
-        public void CanGetSingleRes()
-        {
-            int resnumber = 300;
-            Resolution res = new Resolution { Body = "blah", ResNumber = 150 };
-            repo.ManuallyAddRes(res);
-            Resolution singleRes = repo.GetSingleRes(resnumber);
-            int expected = res.ResNumber;
-            Assert.AreEqual(expected, singleRes.ResNumber);
         }
 
         [TestMethod]
