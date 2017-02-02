@@ -50,7 +50,10 @@ namespace Council_Tracker.DAL
             {
                 Ordinance ordinance = new Ordinance();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2016_{k}.htm"); // REMINDER: THEY HAVEN'T CHANGED THE URL TO bl2017 YET!
-
+                if (rawHtml.Contains("Sorry, we couldn't find the page you were looking for..."))
+                {
+                    rawHtml = client.DownloadString($"http://www.nashville.gov/mc/ordinances/term_2015_2019/bl2017_{k}.htm");
+                }
                 ordinance.OrdNumber = k;
 
                 ordinance.Year = 2017; 
@@ -70,7 +73,8 @@ namespace Council_Tracker.DAL
                     string match = bodyTextMatch[j].ToString();
                     bodyText += match;
                 }
-                ordinance.Body = bodyText;
+                //going to have to switch this back at some point and create a new column in the models.
+                ordinance.Body = rawHtml;
 
                 //string sponsorPattern = @"Sponsored by: (?<sponsor>.*?)<\/p>";
                 //Regex sponsorRgx = new Regex(sponsorPattern);

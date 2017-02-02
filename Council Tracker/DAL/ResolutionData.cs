@@ -51,7 +51,10 @@ namespace Council_Tracker.DAL
             {
                 Resolution resolution = new Resolution();
                 string rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2016_{i}.htm"); // THEY HAVEN'T CHANGED THE URL TO REFLECT 2017 YET. 
-                
+                if (rawHtml.Contains("Sorry, we couldn't find the page you were looking for..."))
+                {
+                    rawHtml = client.DownloadString($"http://www.nashville.gov/mc/resolutions/term_2015_2019/rs2017_{i}.htm");
+                }
                 resolution.ResNumber = i;
                 resolution.Year = 2017;
 
@@ -70,7 +73,7 @@ namespace Council_Tracker.DAL
                     string match = bodyTextMatch[j].ToString();
                     bodyText += match;
                 }
-                resolution.Body = bodyText;
+                resolution.Body = rawHtml;
 
                 scrapedResolutions[i - 503] = resolution;
             }
