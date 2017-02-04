@@ -27,14 +27,27 @@ namespace Council_Tracker.Tests.DAL
         {
 
             mock_context = new Mock<CTrackerContext>();
+
             mock_members = new Mock<DbSet<CouncilMember>>();
-            mock_resolutions = new Mock<DbSet<Resolution>>();
+            mock_member_list = new List<CouncilMember>();
+            CouncilMember bogus_council_member = new CouncilMember() { ID = 1, Name = "Roger" };
+            mock_member_list.Add(bogus_council_member);
+
             mock_ords = new Mock<DbSet<Ordinance>>();
+            mock_ord_list = new List<Ordinance>();
+            Ordinance bogus_ord = new Ordinance() { ID = 1, Body = "Bogus Ordinance", OrdNumber = 1 };
+            mock_ord_list.Add(bogus_ord);
+
+            mock_resolutions = new Mock<DbSet<Resolution>>();
+            mock_res_list = new List<Resolution>();
+            Resolution bogus_res = new Resolution() { ID = 1, Body = "Bogus Resolution", ResNumber = 1 };
+            mock_res_list.Add(bogus_res);
+
             mock_app_user = new Mock<DbSet<ApplicationUser>>();
             mock_app_users_list = new List<ApplicationUser>();
-            mock_ord_list = new List<Ordinance>();
-            mock_res_list = new List<Resolution>();
-            mock_member_list = new List<CouncilMember>();
+            ApplicationUser bogus_user1 = new ApplicationUser() { Id = "1", UserName = "Tobey" };
+            mock_app_users_list.Add(bogus_user1);
+
             repo = new CTrackerRepository(mock_context.Object);
             ConnectToDatastore();
         }
@@ -99,7 +112,6 @@ namespace Council_Tracker.Tests.DAL
             Assert.IsNotNull(list);
         }
 
-
         [TestMethod]
         public void canReturnMemList()
         {
@@ -111,85 +123,46 @@ namespace Council_Tracker.Tests.DAL
         public void CanReturnUser()
         {
             //Arrange 
-            ApplicationUser user = new ApplicationUser() { Id="999", UserName = "Tobey" };
+            string userId = "1";
             //Act 
-            repo.ManuallyCreateUser(user);
-            ApplicationUser found = repo.ReturnUser(user.Id);
+            ApplicationUser found = repo.ReturnUser(userId);
             //Assert
             Assert.AreEqual(1, repo.Context.Users.Count());
             Assert.AreEqual("Tobey", found.UserName);
         }
 
         [TestMethod]
-        public void CanGetOrds()
-        {
-            //Arrange 
-            Ordinance ord = new Ordinance { Body = "blah", OrdNumber = 1 };
-            //Act
-            repo.ManuallyAddOrd(ord);
-            int expected = 1;
-            //Assert
-            Assert.AreEqual(expected, repo.Context.Ordinances.Count());
-        }
-
-        [TestMethod]
         public void CanGetSingleOrd()
         {
-            int ordnumber = 150;
-            Ordinance ord = new Ordinance { Body = "blah", OrdNumber = 150 };
-            repo.ManuallyAddOrd(ord);
-            Ordinance singleOrd = repo.GetSingleOrd(ordnumber);
-            int expected = ord.OrdNumber;
-            Assert.AreEqual(expected, singleOrd.OrdNumber);
+            //Arrange
+            int ordnumber = 1;
+            //Act 
+            Ordinance foundOrd = repo.GetSingleOrd(ordnumber);
+            //Assert
+            Assert.AreEqual(1, repo.Context.Ordinances.Count());
+            Assert.AreEqual(1, foundOrd.ID);
         }
 
         [TestMethod]
         public void CanGetSingleRes()
         {
-            int resnumber = 300;
-            Resolution res = new Resolution { Body = "blah", ResNumber = 300 };
-            repo.ManuallyAddRes(res);
-            Resolution singleRes = repo.GetSingleRes(resnumber);
-            int expected = res.ResNumber;
-            Assert.AreEqual(expected, singleRes.ResNumber);
-        }
-
-        [TestMethod]
-        public void CanGetResolutions()
-        {
             //Arrange
-            Resolution res = new Resolution { Body = "blahblah", ResNumber = 5 };
+            int resnumber = 1;
             //Act
-            repo.ManuallyAddRes(res);
-            int expected = 1;
+            Resolution foundRes = repo.GetSingleRes(resnumber);
             //Assert
-            Assert.AreEqual(expected, repo.Context.Resolutions.Count());
-        }
-
-        [TestMethod]
-        public void CanGetMembers()
-        {
-            //Arrange
-            CouncilMember mem = new CouncilMember { Name = "tobey", ID = 100, Office = "vice mayor" };
-            //Act
-            repo.ManuallyAddMember(mem);
-            int expected = 1;
-            //Assert
-            Assert.AreEqual(expected, repo.Context.Council_Members.Count());
+            Assert.AreEqual(1, foundRes.ID);
         }
 
         [TestMethod]
         public void CanGetSingleMemberByID()
         {
             //Arrange
-            int id = 100;
-            CouncilMember dude = new CouncilMember { Name = "Bill", ID = 100, Office = "At Large" };
+            int id = 1;
             //Act
-            repo.ManuallyAddMember(dude);
             CouncilMember singleMem = repo.GetSingleMember(id);
-            int expected = dude.ID;
             //Assert
-            Assert.AreEqual(expected, singleMem.ID);
+            Assert.AreEqual(1, singleMem.ID);
         }
 
         [TestMethod]

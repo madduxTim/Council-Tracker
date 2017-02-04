@@ -19,20 +19,9 @@ namespace Council_Tracker.DAL
             Context = new CTrackerContext();
         }
 
-        public void ManuallyAddOrd(Ordinance ord)
-        {
-            Context.Ordinances.Add(ord);
-            Context.SaveChanges();
-        }
         public List<Ordinance> GetOrds()
         {
             return Context.Ordinances.ToList();
-        }
-
-        public void ManuallyAddRes(Resolution res)
-        {
-            Context.Resolutions.Add(res);
-            Context.SaveChanges();
         }
 
         public List<Resolution> GetResolutions()
@@ -40,11 +29,6 @@ namespace Council_Tracker.DAL
             return Context.Resolutions.ToList();
         }
 
-        public void ManuallyAddMember(CouncilMember mem)
-        {
-            Context.Council_Members.Add(mem);
-            Context.SaveChanges();
-        }
         public List<CouncilMember> GetMembers()
         {
             return Context.Council_Members.ToList();
@@ -54,6 +38,12 @@ namespace Council_Tracker.DAL
         {
             Ordinance ord = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordnumber);
             return ord;
+        }
+
+        public ApplicationUser ReturnUser(string userId)
+        {
+            ApplicationUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
+            return found_user;
         }
 
         public Resolution GetSingleRes(int resnumber)
@@ -82,18 +72,6 @@ namespace Council_Tracker.DAL
             ApplicationUser user = Context.Users.FirstOrDefault(u => u.Id == userID);
             resolution.Users.Add(user);
             Context.SaveChanges(); 
-        }
-
-        public void ManuallyCreateUser(ApplicationUser user)
-        {
-            Context.Users.Add(user);
-            Context.SaveChanges();
-        }
-
-        public ApplicationUser ReturnUser(string userId)
-        {
-            ApplicationUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
-            return found_user;
         }
     }
 }
