@@ -38,6 +38,7 @@ namespace Council_Tracker.Tests.DAL
             Ordinance bogus_ord = new Ordinance() { ID = 1, Body = "Bogus Ordinance", OrdNumber = 1 };
             mock_ord_list.Add(bogus_ord);
 
+
             mock_resolutions = new Mock<DbSet<Resolution>>();
             mock_res_list = new List<Resolution>();
             Resolution bogus_res = new Resolution() { ID = 1, Body = "Bogus Resolution", ResNumber = 1 };
@@ -47,6 +48,10 @@ namespace Council_Tracker.Tests.DAL
             mock_app_users_list = new List<ApplicationUser>();
             ApplicationUser bogus_user1 = new ApplicationUser() { Id = "1", UserName = "Tobey" };
             mock_app_users_list.Add(bogus_user1);
+
+            //Thought this would be the way to simulate Tracking, but crashes Initialize()
+            //bogus_user1.Ordinances.Add(new Ordinance() { ID = 2, OrdNumber = 2, Body = "Tracked Ord" });
+            //bogus_ord.Users.Add(bogus_user1);
 
             repo = new CTrackerRepository(mock_context.Object);
             ConnectToDatastore();
@@ -101,21 +106,33 @@ namespace Council_Tracker.Tests.DAL
         [TestMethod]
         public void canReturnOrdList()
         {
+            //Arrange 
+            //Act
             List<Ordinance> list = repo.GetOrds();
+            //Assert
             Assert.IsNotNull(list);
+            Assert.AreEqual(1, list.Count());
         }
 
         [TestMethod]
         public void canReturnResList()
         {
+            //Arrange
+            //Act
             List<Resolution> list = repo.GetResolutions();
+            //Assert
             Assert.IsNotNull(list);
+            Assert.AreEqual(1, list.Count());
         }
 
         [TestMethod]
         public void canReturnMemList()
         {
+            //Arrange 
+            //Act 
             List<CouncilMember> list = repo.GetMembers();
+            //Assert
+            Assert.AreEqual(1, list.Count());
             Assert.IsNotNull(list);
         }
 
@@ -165,15 +182,15 @@ namespace Council_Tracker.Tests.DAL
             Assert.AreEqual(1, singleMem.ID);
         }
 
-        [TestMethod]
-        public void CanGetTrackedOrdinances()
-        {
-            //Arrange
+        //[TestMethod]
+        //public void CanGetTrackedOrdinances()
+        //{
+        //    //Arrange
+          
+        //    //Act
 
-            //Act
+        //    //Assert
 
-            //Assert
-
-        }
+        //}
     }
 }

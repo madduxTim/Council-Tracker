@@ -65,6 +65,13 @@ namespace Council_Tracker.DAL
             ordinance.Users.Add(user);
             Context.SaveChanges();
         }
+        public void UntrackOrdinance(int ordNumber, string userID)
+        {
+            Ordinance ordinance = Context.Ordinances.FirstOrDefault(o => o.OrdNumber == ordNumber);
+            ApplicationUser user = Context.Users.FirstOrDefault(u => u.Id == userID);
+            ordinance.Users.Remove(user);
+            Context.SaveChanges();
+        }
 
         public void TrackResolution(int resNumber, string userID)
         {
@@ -73,5 +80,13 @@ namespace Council_Tracker.DAL
             resolution.Users.Add(user);
             Context.SaveChanges(); 
         }
+        public void UntrackResolution(int resNumber, string userID)
+        {
+            Resolution resolution = Context.Resolutions.FirstOrDefault(r => r.ResNumber == resNumber);
+            ApplicationUser user = Context.Users.FirstOrDefault(u => u.Id == userID);
+            resolution.Users.Remove(user);
+            Context.SaveChanges();
+        }
+
     }
 }
