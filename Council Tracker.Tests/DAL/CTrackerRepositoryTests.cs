@@ -49,9 +49,11 @@ namespace Council_Tracker.Tests.DAL
             ApplicationUser bogus_user1 = new ApplicationUser() { Id = "1", UserName = "Tobey" };
             mock_app_users_list.Add(bogus_user1);
 
-            //Thought this would be the way to simulate Tracking, but crashes Initialize()
+            //Thought this would be the way to simulate Tracking, but it crashes Initialize()
             //bogus_user1.Ordinances.Add(new Ordinance() { ID = 2, OrdNumber = 2, Body = "Tracked Ord" });
             //bogus_ord.Users.Add(bogus_user1);
+            //bogus_user1.Resolutions.Add(bogus_res);
+            //bogus_res.Users.Add(bogus_user1);
 
             repo = new CTrackerRepository(mock_context.Object);
             ConnectToDatastore();

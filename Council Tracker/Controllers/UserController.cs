@@ -46,6 +46,24 @@ namespace Council_Tracker.Controllers
                 return "Error! Bummer dude.";
             }
         }
+
+        [HttpDelete]
+        [Route("api/User/Ordinance/{ordNumber}")]
+        public string DeleteOrd(int ordNumber)
+        {
+            ApplicationUser loggedInUser = userManager.FindById(User.Identity.GetUserId());
+            Ordinance ord = new Ordinance();
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
+            {
+                repo.UntrackOrdinance(ordNumber, loggedInUser.Id);
+                return "Posted. Nice work.";
+            }
+            else
+            {
+                return "Error! Bummer dude.";
+            }
+        }
+
         [HttpPost]
         [Route("api/User/Resolution/{resNumber}")]
         public string PostRes(int resNumber)

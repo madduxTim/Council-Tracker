@@ -24,6 +24,18 @@
             alert("Ordinance " + ordNumber + " has been added to the list of ordinances!");
         }
     };
+
+    $scope.unfollow = (ordNumber) => {
+        if ($scope.userID === null) {
+            alert("You need to be logged in for that!");
+            //location.href("/Account/Register");    // nope. 
+            //$location.url("/Account/Register");    // nope. 
+        }
+        else {
+            $http.delete("/api/User/Ordinance/" + ordNumber);
+            alert("Ordinance " + ordNumber + " has been removed to the list of ordinances!");
+        }
+    };
    
     $scope.ords = [];
     $scope.running = false;
