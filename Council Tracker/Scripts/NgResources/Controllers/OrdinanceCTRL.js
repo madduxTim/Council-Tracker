@@ -12,7 +12,7 @@
     };
 
     $scope.follow = (ordNumber) => {
-        if ($scope.userID == null)
+        if ($scope.userID === null)
         {
             alert("You need to be logged in for that!");
             //location.href("/Account/Register");    // nope. 
