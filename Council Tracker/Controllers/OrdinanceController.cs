@@ -1,13 +1,7 @@
 ﻿using Council_Tracker.DAL;
 using Council_Tracker.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Microsoft.AspNet.Identity.Owin;
-using System.Web;
 
 namespace Council_Tracker.Controllers
 {

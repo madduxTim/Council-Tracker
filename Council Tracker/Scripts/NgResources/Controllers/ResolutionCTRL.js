@@ -23,6 +23,16 @@
         }
     };
 
+    $scope.unfollow = (resNumber) => {
+        if ($scope.userID == null) {
+            alert("You need to be logged in for that!");
+        }
+        else {
+            $http.delete("/api/User/Resolution/" + resNumber);
+            alert(`Resolution ${resNumber} has been removed from your list!`);
+        }
+    };
+
     $scope.allRes = [];
     $scope.running = false;
     $scope.getAllRes = () => {

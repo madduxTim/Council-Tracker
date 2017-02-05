@@ -5,7 +5,7 @@
     $scope.getTrackedOrds = () => {
         if (!$scope.ordsrunning) {
             $scope.ordsrunning = true;
-            $http.get("/api/Ordinance")
+            $http.get("/api/TrackedOrds")
             .success(function (response) {
                 $scope.ords = response;
             })
@@ -21,7 +21,7 @@
     $scope.getTrackedRes = () => {
         if (!$scope.resrunning) {
             $scope.resrunning = true;
-            $http.get("/api/Resolution")
+            $http.get("/api/TrackedRes")
             .success(function (response) {
                 $scope.allRes = response;
             })
