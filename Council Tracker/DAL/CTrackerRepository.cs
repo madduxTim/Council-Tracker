@@ -23,10 +23,22 @@ namespace Council_Tracker.DAL
         {
             return Context.Ordinances.ToList();
         }
+        
+        public List<Ordinance> GetTrackedOrds(string userId)
+        {
+            ApplicationUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
+            return Context.Ordinances.Where(o => o.Users == found_user.Ordinances).ToList();
+        }
 
         public List<Resolution> GetResolutions()
         {
             return Context.Resolutions.ToList();
+        }
+
+        public List<Resolution> GetTrackedResolutions(string userId)
+        {
+            ApplicationUser found_user = Context.Users.FirstOrDefault(u => u.Id == userId);
+            return Context.Resolutions.Where(o => o.Users == found_user.Resolutions).ToList();
         }
 
         public List<CouncilMember> GetMembers()
@@ -87,6 +99,5 @@ namespace Council_Tracker.DAL
             resolution.Users.Remove(user);
             Context.SaveChanges();
         }
-
     }
 }

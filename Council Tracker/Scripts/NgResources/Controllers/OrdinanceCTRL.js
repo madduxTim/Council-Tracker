@@ -1,4 +1,4 @@
-﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce, $location) {
+﻿app.controller("OrdinanceCTRL", function ($scope, $http, $routeParams, $sce) {
 
     $scope.userID = null;
     $scope.signIn = () => {
@@ -12,11 +12,9 @@
     };
 
     $scope.follow = (ordNumber) => {
-        if ($scope.userID === null)
+        if ($scope.userID == null)
         {
             alert("You need to be logged in for that!");
-            //location.href("/Account/Register");    // nope. 
-            //$location.url("/Account/Register");    // nope. 
         }
         else
         {
@@ -28,8 +26,6 @@
     $scope.unfollow = (ordNumber) => {
         if ($scope.userID === null) {
             alert("You need to be logged in for that!");
-            //location.href("/Account/Register");    // nope. 
-            //$location.url("/Account/Register");    // nope. 
         }
         else {
             $http.delete("/api/User/Ordinance/" + ordNumber);

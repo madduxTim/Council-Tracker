@@ -212,6 +212,8 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ResolutionController.cs" />
     <Compile Include="Controllers\OrdinanceController.cs" />
+    <Compile Include="Controllers\TrackedOrdsController.cs" />
+    <Compile Include="Controllers\TrackedResController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\OrdinanceData.cs" />
     <Compile Include="DAL\CouncilMemberData.cs" />

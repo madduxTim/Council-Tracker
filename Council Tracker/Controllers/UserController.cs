@@ -56,11 +56,11 @@ namespace Council_Tracker.Controllers
             if (ModelState.IsValid && User.Identity.IsAuthenticated)
             {
                 repo.UntrackOrdinance(ordNumber, loggedInUser.Id);
-                return "Posted. Nice work.";
+                return "Removed.";
             }
             else
             {
-                return "Error! Bummer dude.";
+                return "Error! Not Removed.";
             }
         }
 
@@ -81,5 +81,21 @@ namespace Council_Tracker.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("api/User/Resolution/{resNumber}")]
+        public string DeleteRes(int resNumber)
+        {
+            ApplicationUser loggedInUser = userManager.FindById(User.Identity.GetUserId());
+            Ordinance ord = new Ordinance();
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
+            {
+                repo.UntrackResolution(resNumber, loggedInUser.Id);
+                return "Removed.";
+            }
+            else
+            {
+                return "Error! Not deleted.";
+            }
+        }
     }
 }
