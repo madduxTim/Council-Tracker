@@ -18,8 +18,9 @@ namespace Council_Tracker.Models
             return userIdentity;
         }
 
-        public virtual ICollection<Ordinance> Ordinances { get; set; }
-        public virtual ICollection<Resolution> Resolutions { get; set; }
+        public virtual ICollection<Ordinance> Ordinances { get; set; } = new List<Ordinance>();
+        public virtual ICollection<Resolution> Resolutions { get; set; } = new List<Resolution>();
+        
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

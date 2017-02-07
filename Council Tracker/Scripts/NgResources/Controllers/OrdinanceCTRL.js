@@ -12,7 +12,7 @@
     };
 
     $scope.follow = (ordNumber) => {
-        if ($scope.userID == null)
+        if ($scope.userID === null)
         {
             alert("You need to be logged in for that!");
         }
@@ -51,8 +51,7 @@
 
     $scope.ord = [];
     $scope.getOrd = (bill_number) => {
-        var url = window.location.href.split("/");
-        var number = url[url.length - 1];
+        var number = $routeParams.ordinanceNumber;
         $http.get("/api/Ordinance/" + number)
             .success(function (response) {
                 $scope.ord = response;

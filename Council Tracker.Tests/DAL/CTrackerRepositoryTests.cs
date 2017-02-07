@@ -21,6 +21,7 @@ namespace Council_Tracker.Tests.DAL
         private List<Ordinance> mock_ord_list { get; set; }
         private List<Resolution> mock_res_list { get; set; }
         private List<CouncilMember> mock_member_list { get; set; }
+        private ApplicationUser bogus_user1 { get; set; }
 
         [TestInitialize]
         public void Initialize()
@@ -35,13 +36,13 @@ namespace Council_Tracker.Tests.DAL
 
             mock_ords = new Mock<DbSet<Ordinance>>();
             mock_ord_list = new List<Ordinance>();
-            Ordinance bogus_ord = new Ordinance() { ID = 1, Body = "Bogus Ordinance", OrdNumber = 1 };
+            Ordinance bogus_ord = new Ordinance() { ID = 1, Body = "Bogus Ordinance", OrdNumber = 1, Users = new List<ApplicationUser>() };
             mock_ord_list.Add(bogus_ord);
 
 
             mock_resolutions = new Mock<DbSet<Resolution>>();
             mock_res_list = new List<Resolution>();
-            Resolution bogus_res = new Resolution() { ID = 1, Body = "Bogus Resolution", ResNumber = 1 };
+            Resolution bogus_res = new Resolution() { ID = 1, Body = "Bogus Resolution", ResNumber = 1, Users = new List<ApplicationUser>() };
             mock_res_list.Add(bogus_res);
 
             mock_app_user = new Mock<DbSet<ApplicationUser>>();
@@ -49,16 +50,13 @@ namespace Council_Tracker.Tests.DAL
             ApplicationUser bogus_user1 = new ApplicationUser() { Id = "1", UserName = "Tobey" };
             mock_app_users_list.Add(bogus_user1);
 
-            //Thought this would be the way to simulate Tracking, but it crashes Initialize()
-            //bogus_user1.Ordinances.Add(new Ordinance() { ID = 2, OrdNumber = 2, Body = "Tracked Ord" });
-            //bogus_ord.Users.Add(bogus_user1);
+            bogus_user1.Ordinances.Add(new Ordinance() { ID = 2, OrdNumber = 2, Body = "Tracked Ord" });
             //bogus_user1.Resolutions.Add(bogus_res);
-            //bogus_res.Users.Add(bogus_user1);
 
             repo = new CTrackerRepository(mock_context.Object);
             ConnectToDatastore();
         }
-          
+
         public void ConnectToDatastore()
         {
             var query_mock_users = mock_app_users_list.AsQueryable();
@@ -184,15 +182,20 @@ namespace Council_Tracker.Tests.DAL
             Assert.AreEqual(1, singleMem.ID);
         }
 
-        //[TestMethod]
-        //public void CanGetTrackedOrdinances()
-        //{
-        //    //Arrange
-          
-        //    //Act
-
-        //    //Assert
-
-        //}
+        [TestMethod]
+        public void CanGetTrackedOrdinances()
+        {
+            //Arrange 
+            string userId = "1";
+            //Act 
+            ApplicationUser foundUser = repo.ReturnUser(userId);
+            int ords = foundUser.Ordinances.Count;
+            List<Ordinance> foundOrds = foundUser.Ordinances.ToList();
+            //Assert
+            Assert.AreEqual(1, repo.Context.Users.Count());
+            Assert.AreEqual("Tobey", foundUser.UserName);
+            Assert.AreEqual(1, foundUser.Ordinances.Count);
+            Assert.AreEqual("Tracked Ord", foundOrds[0].Body);
+        }
     }
 }
