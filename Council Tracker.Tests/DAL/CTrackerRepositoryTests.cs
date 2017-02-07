@@ -104,7 +104,7 @@ namespace Council_Tracker.Tests.DAL
         }
 
         [TestMethod]
-        public void canReturnOrdList()
+        public void CanReturnOrdList()
         {
             //Arrange 
             //Act
@@ -115,7 +115,7 @@ namespace Council_Tracker.Tests.DAL
         }
 
         [TestMethod]
-        public void canReturnResList()
+        public void CanReturnResList()
         {
             //Arrange
             //Act
@@ -126,7 +126,7 @@ namespace Council_Tracker.Tests.DAL
         }
 
         [TestMethod]
-        public void canReturnMemList()
+        public void CanReturnMemList()
         {
             //Arrange 
             //Act 
