@@ -29,12 +29,18 @@ namespace Council_Tracker.Migrations
                 res => new { res.ResNumber },
                 resData.resolutionScraper()
                 );
-            //context.Council_Members.AddOrUpdate(
-            //    cm => new { cm.Name, cm.Office },   //Reminder, this is checking that the name and office are unique
-            //                                        //data.seedViceMayor()              // Was not allowing me to seed with muliple methods from the councilmemberdata...
-            //                                        //data.seedAtLargeMembers()
-            //    data.seedDistrictedMembers()
-            //);
+            context.Council_Members.AddOrUpdate(
+                cm => new { cm.Name, cm.Office },
+                data.seedDistrictedMembers()
+            );
+            context.Council_Members.AddOrUpdate(
+                cm => new { cm.Name, cm.Office },
+                data.seedViceMayor()
+            );
+            context.Council_Members.AddOrUpdate(
+                cm => new { cm.Name, cm.Office },
+                data.seedAtLargeMembers()
+            );
         }
     }
 }
