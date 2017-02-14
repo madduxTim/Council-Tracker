@@ -50,7 +50,7 @@
     };
 
     $scope.res = [];
-    $scope.getRes = (bill_number) => {
+    $scope.getRes = () => {
         var url = window.location.href.split("/");
         var number = url[url.length - 1];
         $http.get("/api/Resolution/" + number)

@@ -74,7 +74,8 @@ namespace Council_Tracker.DAL
                     bodyText += match;
                 }
                 //going to have to switch this back at some point and create a new column in the models.
-                ordinance.Body = rawHtml;
+                //ordinance.Body = rawHtml;
+                ordinance.Body = bodyText;
 
                 //string sponsorPattern = @"Sponsored by: (?<sponsor>.*?)<\/p>";
                 //Regex sponsorRgx = new Regex(sponsorPattern);
