@@ -14,7 +14,7 @@ namespace Council_Tracker.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Council_Tracker.DAL.CTrackerContext context)
+        protected override void Seed(CTrackerContext context)
         {
             CouncilMemberData data = new CouncilMemberData();
             OrdinanceData ordData = new OrdinanceData();
